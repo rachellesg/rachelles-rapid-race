@@ -4,21 +4,29 @@ console.log("hellu it me");
 
 // CURRENT FEATURES
 // basic af typing speed game within X seconds
+// disabled highlighting of the currentWord box to disallow copying
 // scoring system, the longer the word the more points
 // input box will nudge if incorrect answer
+// add loading (count down) screen after start button is pressed
+// disabled input once game is over
 
 // DOING
-// add loading (count down) screen after start button is pressed
+// stage 1-4 of to do functionality
+// style correct and incorrect answers
 
 // TO DO (important to not so important)
+// add restart button
 // add loading (game lost) screen after game is over
-// style correct and incorrect answers
+// add sound effects for buttons
+// add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
 // highlight LETTER by letter (currentWord) as user enters
 
 // TO DO (functionality) still tbc
-// stage 1: enter 5 words within 20 seconds
-// stage 2: enter 5 words within 15 seconds
+// stage 1: words less than 8 letters ( after 3 words )
+// stage 2: words less than 10 letters ( after 3 words )
+// stage 3: words less than 15 characters ( after 2 words )
+// stage 4: words more than 15 characters ( after 2 words )
 
 // hard mode
 // stage 1: enter 5 words within 20 seconds
@@ -28,10 +36,12 @@ console.log("hellu it me");
 // ++++++++++++++++++++++++ //
 
 /* global vars */
-var timer = 10; // timer to type all words
+var timer = 15; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false;; // if playing or not
+
+var stage = 0; // (normal mode)
 
 /* dom grabs */
 var wordInput = document.querySelector("#word-input");
@@ -58,21 +68,21 @@ var words = [
     'romanticism',
     'rheumatism',
     'rathskeller',
-    'rotundities',
-    'ruffianisms',
-    'radionuclide',
-    'repellencies',
-    'rhizospheres',
-    'reconnaissance',
-    'reflectivities',
-    'repudiationist',
-    'rumormongering',
-    'rhombencephalon',
-    'retinoblastimas',
-    'radiosensitivities',
-    'radiochromatograms',
-    'roentgenologically',
-    'ribonucleoproteins'
+    // 'rotundities',
+    // 'ruffianisms',
+    // 'radionuclide',
+    // 'repellencies',
+    // 'rhizospheres',
+    // 'reconnaissance',
+    // 'reflectivities',
+    // 'repudiationist',
+    // 'rumormongering',
+    // 'rhombencephalon',
+    // 'retinoblastimas',
+    // 'radiosensitivities',
+    // 'radiochromatograms',
+    // 'roentgenologically',
+    // 'ribonucleoproteins'
 ];
 
 //// ++ BASIC FUNCTIONS ++ ////
@@ -94,7 +104,6 @@ function createTimeBar () {
 // initialize game
 function initGame () {
     createTimeBar();
-    startButton.style.visibility = "hidden";
     wordInput.disabled = false;
     wordInput.focus();
     startGame();
@@ -108,10 +117,11 @@ function startGame() {
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
         if (checkMatch()) {
-        calculateScore();
-        console.log("once user hits enter");
-        showMessage.innerHTML = "Correct";
-        clearInput();
+            calculateScore();
+            showMessage.innerHTML = "Correct";
+            stage++;
+            console.log("user stage" + stage);
+            clearInput();
         } else {
             showMessage.innerHTML = "Not correct";
             clearInput();
@@ -127,7 +137,10 @@ function showWord (words) {
     var wordIndex = Math.floor(Math.random() * (maxWords - minWords));
     for (var i = 0; i <= wordIndex; i++) {
         currentWord.textContent = words[wordIndex];
-        // console.log(wordIndex);
+        console.log(currentWord.textContent.length);
+            // words[i].length less than 8 (if stage less than 4)
+            // words[i].length more than 8 (stage less than 8)
+            // words[i].length more than 10 (stage less than 11)
     }
 }
 
@@ -196,16 +209,17 @@ var counter = 3; // countdown 3,2,1 and start game
 
 // to load countdown loading screen after start button is pressed
 function loadingScreen() {
-        overlayScreen.style.visibility = "visible";
+    overlayScreen.style.visibility = "visible";
+    startButton.style.visibility = "hidden";
     var loadCountdown = setInterval(function() {
-        counter = counter - 1;
-        //for (var i = 0; i < counter; i++) {
-            console.log("print count" + counter)
-            overlayBox.innerHTML = counter;
-            if (counter === 0) {
-                overlayBox.innerHTML = "GO"
-            }
-        //}
+    counter = counter - 1;
+    //for (var i = 0; i < counter; i++) {
+        console.log("print count" + counter)
+        overlayBox.innerHTML = counter;
+        if (counter === 0) {
+            overlayBox.innerHTML = "GO"
+        }
+    //}
     },1000);
 
     setTimeout(function(){

@@ -27,14 +27,16 @@ body {
 }
 
 .overlay-box {
-    justify-content: flex-start;
-    width: 50%;
+    width: 100%;
     height: 50%;
-    top: 25%;
-    left: 20%;
+    top: 15%;
     position: absolute;
     font-size: 45px;
     color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* top timebar */
