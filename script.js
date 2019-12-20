@@ -16,6 +16,7 @@ var showScore = document.querySelector("#score");
 var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
+var startButton = document.querySelector("#start-button");
 
 /* hard coded array of werds */
 var words = [
@@ -27,20 +28,20 @@ var words = [
     'ruckling',
     'rugulose',
     'rubellas',
-    'repatriate',
-    'romanticism',
-    'rheumatism',
-    'rathskeller',
-    'rotundities',
-    'ruffianisms',
-    'reconnaissance',
-    'reflectivities',
-    'repudiationist',
-    'rumormongering',
-    'radiosensitivities',
-    'radiochromatograms',
-    'roentgenologically',
-    'ribonucleoproteins'
+    // 'repatriate',
+    // 'romanticism',
+    // 'rheumatism',
+    // 'rathskeller',
+    // 'rotundities',
+    // 'ruffianisms',
+    // 'reconnaissance',
+    // 'reflectivities',
+    // 'repudiationist',
+    // 'rumormongering',
+    // 'radiosensitivities',
+    // 'radiochromatograms',
+    // 'roentgenologically',
+    // 'ribonucleoproteins'
 ];
 
 /*** FUNCTIONS ***/
@@ -62,6 +63,7 @@ function createTimeBar () {
 /* load words */
 function initGame () {
     createTimeBar();
+    startButton.style.visibility = "hidden";
     startGame();
     showWord(words);
     setInterval(countdownTimer, speed);
@@ -71,22 +73,29 @@ function initGame () {
 /* start game */
 function startGame() {
     wordInput.onkeypress = function(event) {
+    if (event.keyCode === 13) {
         if (checkMatch()) {
-            showWord(words);
-            score++;
-            console.log("once user hits enter");
-        }
-    };
-
-    if (score === -1) {
-        showScore.innerHTML = 0;
-        console.log("score this should show -1: " + score);
-    } else {
+        console.log("once user hits enter");
+        showMessage.innerHTML = "Correct";
+        score++;
         showScore.innerHTML = score;
-        console.log("anything else BUT -1: " + score);
+            clearInput();
+        } else {
+            showMessage.innerHTML = "Not correct";
+            clearInput();
+        }
     }
+
 }
 
+    // if (score === -1) {
+    //     showScore.innerHTML = 0;
+    //     console.log("score this should show -1: " + score);
+    // } else {
+    //     showScore.innerHTML = score;
+    //     console.log("anything else BUT -1: " + score);
+    // }
+}
 
 /* grab from list of words */
 function showWord (words) {
@@ -102,11 +111,10 @@ function showWord (words) {
 /* check match */
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
-        showMessage.innerHTML = "Correct";
         console.log('correct');
+        showWord(words);
         return true;
     } else {
-        showMessage.innerHTML = "Not correct";
         console.log('no');
         return false;
     }
@@ -130,7 +138,8 @@ function countdownTimer (isPlaying) {
 function checkStatus() {
   if (!isPlaying && timer === 0) {
     showMessage.innerHTML = 'Game Over!!!';
+    currentWord.textContent = " ";
+    wordInput.disabled = true;
         // to do: add overlay to say game over
-    score = -1;
   }
 }
