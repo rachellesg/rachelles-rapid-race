@@ -70,22 +70,20 @@ function initGame () {
 
 /* start game */
 function startGame() {
-    wordInput.focus();
-    clearInput();
-
-    if (checkMatch()) {
-        isPlaying = true;
-        showWord(words);
-        score++;
-        console.log("score" + score);
-    }
+    wordInput.onkeypress = function(event) {
+        if (checkMatch()) {
+            showWord(words);
+            score++;
+            console.log("once user hits enter");
+        }
+    };
 
     if (score === -1) {
         showScore.innerHTML = 0;
-        console.log("score this should show -1,,," + score);
+        console.log("score this should show -1: " + score);
     } else {
         showScore.innerHTML = score;
-        console.log("anything else BUT -1" + score);
+        console.log("anything else BUT -1: " + score);
     }
 }
 
@@ -96,22 +94,23 @@ function showWord (words) {
     var minWords = 0;
     var wordIndex = Math.floor(Math.random() * (maxWords - minWords));
     for (var i = 0; i <= wordIndex; i++) {
-        currentWord.innerHTML = words[wordIndex];
+        currentWord.textContent = words[wordIndex];
         // console.log(wordIndex);
     }
 }
 
 /* check match */
 function checkMatch() {
-    if (wordInput.value === currentWord.innerHTML) {
+    if (wordInput.value === currentWord.textContent) {
         showMessage.innerHTML = "Correct";
         console.log('correct');
         return true;
     } else {
-        showMessage.innerHTML = " ";
+        showMessage.innerHTML = "Not correct";
         console.log('no');
         return false;
     }
+        clearInput();
 }
 
 function countdownTimer (isPlaying) {
