@@ -44,14 +44,14 @@ var words = [
     // 'ribonucleoproteins'
 ];
 
-/*** FUNCTIONS ***/
+//// ++ BASIC FUNCTIONS ++ ////
 
-/* clear */
+// clear input
 function clearInput() {
     document.querySelector("#word-input").value = "";
 }
 
-/* creating timebar */
+// creating top timebar
 function createTimeBar () {
     var timeBar = document.querySelector("#timebar");
     timeBar.classList.add("timeleft");
@@ -60,17 +60,19 @@ function createTimeBar () {
     },100);
 }
 
-/* load words */
+// initialize game
 function initGame () {
     createTimeBar();
     startButton.style.visibility = "hidden";
+    wordInput.disabled = false;
+    wordInput.focus();
     startGame();
     showWord(words);
     setInterval(countdownTimer, speed);
     setInterval(checkStatus, 50);
 }
 
-/* start game */
+// <actually> start game
 function startGame() {
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
@@ -85,19 +87,10 @@ function startGame() {
             clearInput();
         }
     }
-
+    }
 }
 
-    // if (score === -1) {
-    //     showScore.innerHTML = 0;
-    //     console.log("score this should show -1: " + score);
-    // } else {
-    //     showScore.innerHTML = score;
-    //     console.log("anything else BUT -1: " + score);
-    // }
-}
-
-/* grab from list of words */
+// generate words
 function showWord (words) {
     var maxWords = words.length;
     var minWords = 0;
@@ -108,7 +101,7 @@ function showWord (words) {
     }
 }
 
-/* check match */
+// check word match
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
         console.log('correct');
@@ -121,6 +114,7 @@ function checkMatch() {
         clearInput();
 }
 
+// countdown timer and calculate game end
 function countdownTimer (isPlaying) {
     if (timer > 0) {
         isPlaying = true;
@@ -143,3 +137,5 @@ function checkStatus() {
         // to do: add overlay to say game over
   }
 }
+
+//// ++ PRETTIFYING FUNCTIONS ++ ////
