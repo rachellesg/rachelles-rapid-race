@@ -11,20 +11,25 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <!-- progress bar -->
     <progress max="10" id="timebar">
     </progress>
     <main class="container">
         <header>Rachelle's Rapid Race</header>
         <div class="instructions">
-            Note that there is no EASY nor a hard version,<br>
-            you get what you are given.<br>
-            It starts from fairly average and gradually transits to probably manageable....<br>that is if you focus hard enough. <!--You can choose your modes though. Challenge yourself with the following modes:--><br><br>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<br><br>
 
-            You have a total of <span id="seconds">100</span> seconds to see how many words you manage to type.
+            Ut enim ad minim <span id="seconds">100</span> seconds tempor incididunt ut labore et dolore.......
         </div>
-        <div class="user-scores">
-            Current score: <p id="score">0</p>
-            Time left: <p id="time">X</p>
+        <div class="user-dashboard">
+            <div class="user-score">
+                <span class="icon-score"> </span>
+                Current score: <span id="score">0</span>
+            </div>
+            <div class="user-time">
+                <span class="icon-time"> </span>
+                Time left: <span id="time">X</span>
+            </div>
         </div>
 
         <!-- where current word loads -->
@@ -36,6 +41,7 @@
         <!-- output message loads -->
         <div id="message"></div>
 
+        <!-- buttons -->
         <button id="start-button" onclick="initGame()">START GAME</button>
     </main>
 </body>

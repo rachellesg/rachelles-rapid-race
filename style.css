@@ -11,6 +11,7 @@ body {
     height: 100vh;
     font-family: 'Wellfleet Regular';
     text-align: center;
+    font-size: 18px;
 }
 
 /* top timebar */
@@ -42,6 +43,7 @@ header {
     white-space: nowrap;
     overflow: hidden;
     font-size: 35px;
+    font-weight: bold;
     line-height: 50px;
     /* or 104% */
     margin: 0 auto 20px;
@@ -73,10 +75,11 @@ header {
 input {
     background: rgb(255,255,255,0.5);
     border: none;
-    padding: 6px 16px;
+    max-width: 414px;
     text-align: center;
     border-bottom: 5px solid #efb7c0;
     outline: none;
+    font-size: 35px;
 }
 
 /*input,
@@ -92,9 +95,86 @@ input[disabled] {
     outline: none;
 }
 
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(5px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-5px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(5px, 0, 0);
+  }
+}
+
 /* regular elements */
 
-#current-word {
-    font-size: 40px;
+/* dashboard */
+.user-dashboard {
+    margin: 20px 0;
+}
+
+.icon-score {
+    background: url(img/trophy.svg) no-repeat top left;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    display: inline-block;
+}
+
+.icon-time {
+    background: url(img/time.svg) no-repeat top left;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    display: inline-block;
+}
+
+#seconds {
     font-weight: bold;
+}
+
+#current-word {
+    font-size: 35px;
+    font-weight: bold;
+    background: #FFFFFF;
+    max-width: 414px;
+    margin: 0 auto 20px;
+    -webkit-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
+#message {
+    margin: 0 auto 20px;
+}
+
+
+/* button */
+#start-button {
+    background: #FFFFFF;
+    border: 0;
+    padding: 10px 15px;
+    box-shadow: 0px 5px #f59cb0;
+}
+
+#start-button:hover {
+    transform: translateY(5px);
+    box-shadow: 0px 3px #f59cb0;
 }

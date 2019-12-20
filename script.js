@@ -1,9 +1,15 @@
 console.log("hellu it me");
 
 
-
 // ++++++ GAME LOGIC ++++++ //
 
+// CURRENT LOGIC
+// basic af typing speed game within X seconds
+
+// TO DO
+// scoring system, the longer the word the more points
+
+// TO DO (functionality)
 // stage 1 : enter 5 words within 20 seconds
 // stage 2: enter 5 words within 15 seconds
 
@@ -30,7 +36,6 @@ var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
-var header = document.querySelector("h1");
 
 /* hard coded array of werds */
 var words = [
@@ -42,20 +47,20 @@ var words = [
     'ruckling',
     'rugulose',
     'rubellas',
-    // 'repatriate',
-    // 'romanticism',
-    // 'rheumatism',
-    // 'rathskeller',
-    // 'rotundities',
-    // 'ruffianisms',
-    // 'reconnaissance',
-    // 'reflectivities',
-    // 'repudiationist',
-    // 'rumormongering',
-    // 'radiosensitivities',
-    // 'radiochromatograms',
-    // 'roentgenologically',
-    // 'ribonucleoproteins'
+    'repatriate',
+    'romanticism',
+    'rheumatism',
+    'rathskeller',
+    'rotundities',
+    'ruffianisms',
+    'reconnaissance',
+    'reflectivities',
+    'repudiationist',
+    'rumormongering',
+    'radiosensitivities',
+    'radiochromatograms',
+    'roentgenologically',
+    'ribonucleoproteins'
 ];
 
 //// ++ BASIC FUNCTIONS ++ ////
@@ -123,6 +128,12 @@ function checkMatch() {
         return true;
     } else {
         console.log('no');
+        setTimeout(function() {
+            wordInput.classList.add("shake");
+        },100);
+        setTimeout(function() {
+            wordInput.classList.remove("shake");
+        },200);
         return false;
     }
         clearInput();
@@ -136,7 +147,6 @@ function countdownTimer (isPlaying) {
         console.log(timer, isPlaying);
     } else if (timer === 0) {
         isPlaying = false;
-        showMessage.innerHTML = "Game is OVER!";
         console.log(timer, isPlaying);
     }
     showTime.innerHTML = timer;
@@ -147,6 +157,7 @@ function checkStatus() {
   if (!isPlaying && timer === 0) {
     showMessage.innerHTML = 'Game Over!!!';
     currentWord.textContent = " ";
+    clearInput();
     wordInput.disabled = true;
         // to do: add overlay to say game over
   }
