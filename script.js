@@ -7,10 +7,12 @@ console.log("hellu it me");
 // scoring system, the longer the word the more points
 // input box will nudge if incorrect answer
 
-// TO DO (important to not so important)
-// style correct and incorrect answers
+// DOING
 // add loading (count down) screen after start button is pressed
+
+// TO DO (important to not so important)
 // add loading (game lost) screen after game is over
+// style correct and incorrect answers
 // add more modes (css) && || (javascript)
 // highlight LETTER by letter (currentWord) as user enters
 
@@ -30,7 +32,6 @@ var timer = 10; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false;; // if playing or not
-var counter = 4; // countdown 3,2,1 and start game
 
 /* dom grabs */
 var wordInput = document.querySelector("#word-input");
@@ -40,6 +41,7 @@ var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
+var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
 
 /* hard coded array of werds */
@@ -173,6 +175,7 @@ function checkStatus() {
   }
 }
 
+// ezpz calculate scores
 function calculateScore() {
     var wordContent = currentWord.textContent;
     var wordLength = wordContent.length;
@@ -189,14 +192,25 @@ function calculateScore() {
     showScore.innerHTML = score;
 }
 
-function loadingScreen() {
-    setInterval(function() {
-        for (var i = 0; i < counter; i++) {
-            overlayBox.innerHTML = counter;
-            console.log("print count" + counter)
-            counter--;
-        }
-    },1000);
-}
+var counter = 3; // countdown 3,2,1 and start game
 
-loadingScreen();
+// to load countdown loading screen after start button is pressed
+function loadingScreen() {
+        overlayScreen.style.visibility = "visible";
+    var loadCountdown = setInterval(function() {
+        counter = counter - 1;
+        //for (var i = 0; i < counter; i++) {
+            console.log("print count" + counter)
+            overlayBox.innerHTML = counter;
+            if (counter === 0) {
+                overlayBox.innerHTML = "GO"
+            }
+        //}
+    },1000);
+
+    setTimeout(function(){
+        initGame();
+        clearInterval(loadCountdown);
+        overlayScreen.style.visibility = "hidden";
+    }, 4000);
+}
