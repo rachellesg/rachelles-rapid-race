@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rachelle's Rapid Race</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Rachelle's Rapid Race -- type as many words as you can within 100 seconds.">
+    <meta name="author" content="Rachelle">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <progress max="10" id="timebar">
+    </progress>
+    <main class="container">
+        <h1>Rachelle's Rapid Race</h1>
+        Note that there is no EASY nor a hard version, it starts from fairly average to probably ok.... if you concentrate hard enough. You can choose your modes though. Challenge yourself with the following modes: <br><br>
+
+        You have a total of <span id="seconds">100</span> seconds to see how many words you are manage to type.
+
+        Current score: <p id="score">0</p>
+        Time left: <p id="time">X</p>
+        <p id="current-word"></p>
+        <input id="word-input">
+
+        <p id="message"></p>
+
+        <button onclick="initGame()">START GAME</button>
+    </main>
+</body>
+<script src="script.js" type="text/javascript"></script>
+</html>
