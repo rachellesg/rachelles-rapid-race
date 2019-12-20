@@ -1,21 +1,27 @@
 console.log("hellu it me");
 
-
 // ++++++ GAME LOGIC ++++++ //
 
-// CURRENT LOGIC
+// CURRENT FEATURES
 // basic af typing speed game within X seconds
-
-// TO DO
 // scoring system, the longer the word the more points
+// input box will nudge if incorrect answer
 
-// TO DO (functionality)
-// stage 1 : enter 5 words within 20 seconds
+// TO DO (important to not so important)
+// style correct and incorrect answers
+// add loading (count down) screen after start button is pressed
+// add loading (game lost) screen after game is over
+// add more modes (css) && || (javascript)
+// highlight LETTER by letter (currentWord) as user enters
+
+// TO DO (functionality) still tbc
+// stage 1: enter 5 words within 20 seconds
 // stage 2: enter 5 words within 15 seconds
 
 // hard mode
 // stage 1: enter 5 words within 20 seconds
 // stage 2: same but words are jumbled up
+// stage 3: make new words out of stage 3's given word
 
 // ++++++++++++++++++++++++ //
 
@@ -24,7 +30,7 @@ var timer = 10; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false;; // if playing or not
-var counter = 3; // countdown 3,2,1 and start game
+var counter = 4; // countdown 3,2,1 and start game
 
 /* dom grabs */
 var wordInput = document.querySelector("#word-input");
@@ -34,6 +40,7 @@ var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
+var overlayBox = document.querySelector(".overlay-box");
 
 /* hard coded array of werds */
 var words = [
@@ -51,10 +58,15 @@ var words = [
     'rathskeller',
     'rotundities',
     'ruffianisms',
+    'radionuclide',
+    'repellencies',
+    'rhizospheres',
     'reconnaissance',
     'reflectivities',
     'repudiationist',
     'rumormongering',
+    'rhombencephalon',
+    'retinoblastimas',
     'radiosensitivities',
     'radiochromatograms',
     'roentgenologically',
@@ -71,7 +83,7 @@ function clearInput() {
 // creating top timebar
 function createTimeBar () {
     var timeBar = document.querySelector("#timebar");
-    timeBar.classList.add("timeleft");
+        timeBar.classList.add("timeleft");
     var barCountdown = setInterval(function() {
         timeBar.setAttribute('value', timer);
     },100);
@@ -164,16 +176,27 @@ function checkStatus() {
 function calculateScore() {
     var wordContent = currentWord.textContent;
     var wordLength = wordContent.length;
-    if (wordLength >= 15)
-    {
+    if (wordLength >= 15) {
         score = score + 5;
-    console.log("this word is " + wordLength + " letters long");
+        console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 10) {
         score = score + 3;
-    console.log("this word is " + wordLength + " letters long");
+        console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 5) {
         score = score + 1;
-    console.log("this word is " + wordLength + " letters long");
+        console.log("this word is " + wordLength + " letters long");
     }
     showScore.innerHTML = score;
 }
+
+function loadingScreen() {
+    setInterval(function() {
+        for (var i = 0; i < counter; i++) {
+            overlayBox.innerHTML = counter;
+            console.log("print count" + counter)
+            counter--;
+        }
+    },1000);
+}
+
+loadingScreen();
