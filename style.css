@@ -1,8 +1,19 @@
+@font-face {
+font-family: 'Wellfleet Regular';
+font-style: normal;
+font-weight: normal;
+src: local('fonts/Wellfleet Regular'), url('fonts/Wellfleet-Regular.woff') format('woff');
+}
+
 body {
     background: url(img/background.png) bottom no-repeat;
     background-size: cover;
     height: 100vh;
+    font-family: 'Wellfleet Regular';
+    text-align: center;
 }
+
+/* top timebar */
 
 #timebar {
     width: 100%;
@@ -21,12 +32,50 @@ progress::-webkit-progress-value {
 progress[value] {
 }
 
+
+/* ++ PRETTIFYING my header ++ */
+
+header {
+    animation: animated-text 4s steps(29,end) 1s 1 normal both,
+    animated-cursor 600ms steps(29,end) infinite;
+    border-right: solid 3px rgba(239,23,94,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 35px;
+    line-height: 50px;
+    /* or 104% */
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+@keyframes animated-text {
+    from {
+        width: 0;
+    }
+    to {
+        width: 380px;
+    }
+}
+
+@keyframes animated-cursor {
+  from {
+    border-right-color: rgba(239,23,94,0.5);
+}
+  to {
+    border-right-color: transparent;
+}
+}
+
+/* input elements */
+
 input {
     background: rgb(255,255,255,0.5);
     border: none;
     padding: 6px 16px;
     text-align: center;
-    border-bottom: 5px solid pink;
+    border-bottom: 5px solid #efb7c0;
     outline: none;
 }
 
@@ -43,36 +92,9 @@ input[disabled] {
     outline: none;
 }
 
+/* regular elements */
+
 #current-word {
     font-size: 40px;
     font-weight: bold;
-}
-
-
-/* ++ PRETTIFYING ++ */
-
-header {
-    animation: animated-text 4s steps(29,end) 1s 1 normal both,
-    animated-cursor 600ms steps(29,end) infinite;
-    border-right: solid 3px rgba(0,0,0,0.5);
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-@keyframes animated-text {
-    from {
-        width: 0;
-    }
-    to {
-        width: 170px;
-    }
-}
-
-@keyframes animated-cursor {
-  from {
-    border-right-color: rgba(0,0,0,0.5);
-}
-  to {
-    border-right-color: transparent;
-}
 }
