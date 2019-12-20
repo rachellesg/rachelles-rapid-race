@@ -147,6 +147,8 @@ input[disabled] {
     font-weight: bold;
 }
 
+
+/* big word  */
 #current-word {
     font-size: 35px;
     font-weight: bold;
@@ -161,6 +163,8 @@ input[disabled] {
     -ms-user-select: none; /* IE10+ */
 }
 
+
+/* output message */
 #message {
     margin: 0 auto 20px;
 }

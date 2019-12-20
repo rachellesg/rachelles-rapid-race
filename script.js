@@ -22,8 +22,6 @@ console.log("hellu it me");
 /* global vars */
 var timer = 10; // timer to type all words
 
-var speed = 1000;
-
 var score = 0; // total score
 var isPlaying = false;; // if playing or not
 var counter = 3; // countdown 3,2,1 and start game
@@ -87,7 +85,7 @@ function initGame () {
     wordInput.focus();
     startGame();
     showWord(words);
-    setInterval(countdownTimer, speed);
+    setInterval(countdownTimer, 1000);
     setInterval(checkStatus, 50);
 }
 
@@ -96,11 +94,10 @@ function startGame() {
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
         if (checkMatch()) {
+        calculateScore();
         console.log("once user hits enter");
         showMessage.innerHTML = "Correct";
-        score++;
-        showScore.innerHTML = score;
-            clearInput();
+        clearInput();
         } else {
             showMessage.innerHTML = "Not correct";
             clearInput();
@@ -160,5 +157,23 @@ function checkStatus() {
     clearInput();
     wordInput.disabled = true;
         // to do: add overlay to say game over
+        // overlay.visibility = "visible";
   }
+}
+
+function calculateScore() {
+    var wordContent = currentWord.textContent;
+    var wordLength = wordContent.length;
+    if (wordLength >= 15)
+    {
+        score = score + 5;
+    console.log("this word is " + wordLength + " letters long");
+    } else if (wordLength >= 10) {
+        score = score + 3;
+    console.log("this word is " + wordLength + " letters long");
+    } else if (wordLength >= 5) {
+        score = score + 1;
+    console.log("this word is " + wordLength + " letters long");
+    }
+    showScore.innerHTML = score;
 }
