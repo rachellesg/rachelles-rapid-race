@@ -1,31 +1,78 @@
 body {
-    /*background: url(img/background.png) bottom no-repeat;
-    background-size: cover;*/
+    background: url(img/background.png) bottom no-repeat;
+    background-size: cover;
     height: 100vh;
 }
 
 #timebar {
     width: 100%;
-    background: red;
+    background: #95d8e8;
     margin-bottom: 20px;
 }
 
 progress::-webkit-progress-bar {
-    background: #fff;
+    background: #95d8e8;
 }
 
 progress::-webkit-progress-value {
-    background: #0063a6;
+    background: #efb7c0;
 }
 
 progress[value] {
 }
 
 input {
-    border: 1px solid yellow;
+    background: rgb(255,255,255,0.5);
+    border: none;
+    padding: 6px 16px;
+    text-align: center;
+    border-bottom: 5px solid pink;
+    outline: none;
+}
+
+/*input,
+input:focus {
+    -webkit-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
+    outline: none;
+}*/
+
+input[disabled] {
+    background: #eeeeee;
+    outline: none;
 }
 
 #current-word {
     font-size: 40px;
     font-weight: bold;
+}
+
+
+/* ++ PRETTIFYING ++ */
+
+header {
+    animation: animated-text 4s steps(29,end) 1s 1 normal both,
+    animated-cursor 600ms steps(29,end) infinite;
+    border-right: solid 3px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes animated-text {
+    from {
+        width: 0;
+    }
+    to {
+        width: 170px;
+    }
+}
+
+@keyframes animated-cursor {
+  from {
+    border-right-color: rgba(0,0,0,0.5);
+}
+  to {
+    border-right-color: transparent;
+}
 }

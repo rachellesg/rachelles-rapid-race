@@ -1,5 +1,18 @@
 console.log("hellu it me");
 
+
+
+// ++++++ GAME LOGIC ++++++ //
+
+// stage 1 : enter 5 words within 20 seconds
+// stage 2: enter 5 words within 15 seconds
+
+// hard mode
+// stage 1: enter 5 words within 20 seconds
+// stage 2: same but words are jumbled up
+
+// ++++++++++++++++++++++++ //
+
 /* global vars */
 var timer = 10; // timer to type all words
 
@@ -17,6 +30,7 @@ var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
+var header = document.querySelector("h1");
 
 /* hard coded array of werds */
 var words = [
@@ -137,5 +151,3 @@ function checkStatus() {
         // to do: add overlay to say game over
   }
 }
-
-//// ++ PRETTIFYING FUNCTIONS ++ ////
