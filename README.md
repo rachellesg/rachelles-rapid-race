@@ -9,6 +9,11 @@ A simple speed typing game, get as many as you can within 100 seconds, the faste
 
 ##### Modes
 
-**Normal**: Simple acceptable-length set of words (that start with R, duh) to go through. You'll do fine.
+**Normal**: You start from a list of simple acceptable-length set of words (that start with R, duh) to go through, and as you prove your worth you'll be given lengthier and lengthier words. You'll do fine.
 
 More modes to come.
+
+
+## Credits
+
+Mountain game background -- thanks to Bevouliin
