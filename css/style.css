@@ -6,12 +6,49 @@ src: local('../fonts/Wellfleet Regular'), url('../fonts/Wellfleet-Regular.woff')
 }
 
 body {
-    background: url(../img/background.png) bottom no-repeat;
+    background: url(../img/background.png) bottom repeat;
     background-size: cover;
     height: 100vh;
     font-family: 'Wellfleet Regular';
     text-align: center;
     font-size: 18px;
+    animation: animatedBackground 1000s linear infinite;
+}
+
+.cloud {
+    animation: floating-cloud 3s infinite ease;
+    background: url(../img/cloud.png) center no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    right: 10vw;
+    top: 21vh;
+    z-index: -10;
+}
+
+.big-cloud {
+    animation: floating-cloud 5s infinite ease;
+    background: url(../img/cloud.png) center no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 12vw;
+    top: 11vh;
+    z-index: -10;
+}
+
+.bigger-cloud {
+    animation: floating-cloud 8s infinite ease;
+    background: url(../img/cloud.png) center no-repeat;
+    background-size: contain;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 63vw;
+    top: -60px;
+    z-index: -10;
 }
 
 main {
@@ -91,6 +128,7 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
     background: #efb7c0;
+    animation: loading 2s linear infinite;
 }
 
 progress[value] {
@@ -245,14 +283,13 @@ input[disabled] {
     color: #cccccc;
     text-decoration: none;
     margin: 0 10px;
-    animation: float 6s ease-in-out infinite;
-    background: rgb(255,255,255,0.8);
+    background: rgb(255,255,255);
     width: 150px;
     height: 150px;
     border-radius: 50%;
     position: absolute;
     right: 0;
-    bottom: 0;
+    top: 30vh;
     color: #000000;
 }
 
@@ -263,6 +300,33 @@ input[disabled] {
 }
 
 /* +++ KEY FRAME ANIMATIONS +++ */
+
+@keyframes floating-cloud {
+ 0% {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(1rem);
+    -webkit-transform: translateY(1rem);
+  }
+
+  100% {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+/*use negative width if you want it to flow right to left else and positive for left to right*/
+  to {
+    background-position: -10000px 0;
+  }
+}
 
 @keyframes animated-text {
     from {
@@ -300,15 +364,9 @@ input[disabled] {
   }
 }
 
-@keyframes float {
-    0% {
-        transform: translatey(0px);
-    }
-    50% {
-        transform: translatey(-20px);
-    }
+@keyframes loading {
     100% {
-        transform: translatey(0px);
+        width: 100%;
     }
 }
 
