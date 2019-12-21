@@ -4,6 +4,7 @@ console.log("hellu it me");
 
 // CURRENT FEATURES
 // basic af typing speed game within X seconds
+// timer counts down PLUS progress bar on the top for visualizing
 // disabled highlighting of the currentWord box to disallow copying
 // scoring system, the longer the word the more points
 // input box will nudge if incorrect answer
@@ -14,12 +15,18 @@ console.log("hellu it me");
 // stage 1-4 of to do functionality
 // style correct and incorrect answers
 
+// CURRENT BUGS
+// score starts at 0 even after first correct input
+// unable to restart just yet
+// words may appear twice in a row
+
 // TO DO (important to not so important)
 // add restart button
 // add loading (game lost) screen after game is over
 // add sound effects for buttons
 // add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
+// add option buttons for modes
 // highlight LETTER by letter (currentWord) as user enters
 
 // TO DO (functionality) still tbc
@@ -28,15 +35,10 @@ console.log("hellu it me");
 // stage 3: words less than 15 characters ( after 2 words )
 // stage 4: words more than 15 characters ( after 2 words )
 
-// hard mode
-// stage 1: enter 5 words within 20 seconds
-// stage 2: same but words are jumbled up
-// stage 3: make new words out of stage 3's given word
-
 // ++++++++++++++++++++++++ //
 
 /* global vars */
-var timer = 15; // timer to type all words
+var timer = 20; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false;; // if playing or not
@@ -53,37 +55,6 @@ var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
 var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
-
-/* hard coded array of werds */
-var words = [
-    'raclette',
-    'rubicon',
-    'radiuses',
-    'renegade',
-    'rawhided',
-    'ruckling',
-    'rugulose',
-    'rubellas',
-    'repatriate',
-    'romanticism',
-    'rheumatism',
-    'rathskeller',
-    // 'rotundities',
-    // 'ruffianisms',
-    // 'radionuclide',
-    // 'repellencies',
-    // 'rhizospheres',
-    // 'reconnaissance',
-    // 'reflectivities',
-    // 'repudiationist',
-    // 'rumormongering',
-    // 'rhombencephalon',
-    // 'retinoblastimas',
-    // 'radiosensitivities',
-    // 'radiochromatograms',
-    // 'roentgenologically',
-    // 'ribonucleoproteins'
-];
 
 //// ++ BASIC FUNCTIONS ++ ////
 
@@ -107,20 +78,20 @@ function initGame () {
     wordInput.disabled = false;
     wordInput.focus();
     startGame();
-    showWord(words);
-    setInterval(countdownTimer, 1000);
-    setInterval(checkStatus, 50);
 }
 
 // <actually> start game
 function startGame() {
+    showWord(words);
+    setInterval(countdownTimer, 1000);
+    setInterval(checkStatus, 50);
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
         if (checkMatch()) {
+            stage++;
             calculateScore();
             showMessage.innerHTML = "Correct";
-            stage++;
-            console.log("user stage" + stage);
+            // console.log("user stage" + stage); // tested and stage works
             clearInput();
         } else {
             showMessage.innerHTML = "Not correct";
@@ -132,15 +103,34 @@ function startGame() {
 
 // generate words
 function showWord (words) {
-    var maxWords = words.length;
-    var minWords = 0;
-    var wordIndex = Math.floor(Math.random() * (maxWords - minWords));
-    for (var i = 0; i <= wordIndex; i++) {
-        currentWord.textContent = words[wordIndex];
-        console.log(currentWord.textContent.length);
-            // words[i].length less than 8 (if stage less than 4)
-            // words[i].length more than 8 (stage less than 8)
-            // words[i].length more than 10 (stage less than 11)
+    if (stage < 4) {
+        var maxWords = words.easy.length; // ALL of the objects in word.easy array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = words.easy[wordIndex];
+            console.log(words.easy[wordIndex]);
+        }
+    } else if (stage >= 4 && stage < 7) {
+        var maxWords = words.medium.length; // ALL of the objects in word.medium array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = words.medium[wordIndex];
+            console.log(words.medium[wordIndex]);
+        }
+    } else if (stage >= 7 && stage < 10) {
+        var maxWords = words.hard.length; // ALL of the objects in word.hard array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = words.hard[wordIndex];
+            console.log(words.hard[wordIndex]);
+        }
+    } else if (stage >= 7 && stage < 10) {
+        var maxWords = words.superhard.length; // ALL of the objects in word.superhard array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = words.superhard[wordIndex];
+            console.log(words.superhard[wordIndex]);
+        }
     }
 }
 
@@ -168,10 +158,10 @@ function countdownTimer (isPlaying) {
     if (timer > 0) {
         isPlaying = true;
         timer--;
-        console.log(timer, isPlaying);
+        //console.log(timer, isPlaying);
     } else if (timer === 0) {
         isPlaying = false;
-        console.log(timer, isPlaying);
+        //console.log(timer, isPlaying);
     }
     showTime.innerHTML = timer;
 }
@@ -194,13 +184,13 @@ function calculateScore() {
     var wordLength = wordContent.length;
     if (wordLength >= 15) {
         score = score + 5;
-        console.log("this word is " + wordLength + " letters long");
+        //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 10) {
         score = score + 3;
-        console.log("this word is " + wordLength + " letters long");
+        //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 5) {
         score = score + 1;
-        console.log("this word is " + wordLength + " letters long");
+        //console.log("this word is " + wordLength + " letters long");
     }
     showScore.innerHTML = score;
 }

@@ -3,7 +3,12 @@
 ## Description
 GA project for Unit 1
 
-**Stage 1:** A simple typing game to words that starts with R, get as many as you can within 100 seconds!
+## Gameplay
 
-## To Dos
-More features to be added.
+A simple speed typing game, get as many as you can within 100 seconds, the faster you type the harder the words get!
+
+##### Modes
+
+**Normal**: Simple acceptable-length set of words (that start with R, duh) to go through. You'll do fine.
+
+More modes to come.
