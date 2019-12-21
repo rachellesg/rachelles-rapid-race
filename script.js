@@ -10,19 +10,21 @@ console.log("hellu it me");
 // input box will nudge if incorrect answer
 // add loading (count down) screen after start button is pressed
 // disabled input once game is over
-// stage 1-4 of to do functionality
+// stage 1-4 of basic functionality
 
 // DOING
 // style correct and incorrect answers
+// add loading (game lost) screen after game is over
 
 // CURRENT BUGS
-// score starts at 0 even after first correct input
 // unable to restart just yet
 // words may appear twice in a row
 
+// FIXED BUGS
+// score starts at 0 even after first correct input
+
 // TO DO (important to not so important)
 // add restart button
-// add loading (game lost) screen after game is over
 // add sound effects for buttons
 // add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
@@ -30,10 +32,10 @@ console.log("hellu it me");
 // highlight LETTER by letter (currentWord) as user enters
 
 // BASIC FUNCTIONALITY
-// stage 1: words less than 8 letters ( after 3 words )
-// stage 2: words less than 10 letters ( after 3 words )
-// stage 3: words less than 15 characters ( after 2 words )
-// stage 4: words more than 15 characters ( after 2 words )
+// stage 1: words less than 8 letters ( after first 3 words )
+// stage 2: words less than 10 letters ( after next 3 words )
+// stage 3: words less than 15 characters ( after next 4 words )
+// stage 4: words more than 15 characters ( after next 4 words )
 
 // ++++++++++++++++++++++++ //
 
@@ -55,6 +57,7 @@ var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
 var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
+var floatingScore = document.querySelector(".floating-score");
 
 //// ++ BASIC FUNCTIONS ++ ////
 
@@ -83,13 +86,13 @@ function initGame () {
 // <actually> start game
 function startGame() {
     showWord(words);
+    floatingScore.style.visibility = "visible";
     setInterval(countdownTimer, 1000);
     setInterval(checkStatus, 50);
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
         if (checkMatch()) {
             stage++;
-            calculateScore();
             showMessage.innerHTML = "Correct";
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
@@ -138,7 +141,9 @@ function showWord (words) {
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
         console.log('correct');
+        calculateScore();
         showWord(words);
+        console.log(score);
         return true;
     } else {
         console.log('no');
