@@ -171,7 +171,7 @@ input[disabled] {
 }
 
 .icon-time {
-    background: url(img/time.svg) no-repeat top left;
+    background: url(../img/time.svg) no-repeat top left;
     width: 25px;
     height: 25px;
     background-size: contain;
@@ -226,7 +226,7 @@ input[disabled] {
 /* floating score */
 
 .icon-score {
-    background: url(img/trophy.svg) no-repeat top left;
+    background: url(../img/trophy.svg) no-repeat top left;
     width: 40px;
     height: 40px;
     background-size: contain;
