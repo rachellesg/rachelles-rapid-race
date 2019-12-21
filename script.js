@@ -11,10 +11,11 @@ console.log("hellu it me");
 // add loading (count down) screen after start button is pressed
 // disabled input once game is over
 // stage 1-4 of basic functionality
+// add loading (game lost) screen after game is over
 
 // DOING
 // style correct and incorrect answers
-// add loading (game lost) screen after game is over
+// add restart button
 
 // CURRENT BUGS
 // unable to restart just yet
@@ -24,7 +25,7 @@ console.log("hellu it me");
 // score starts at 0 even after first correct input
 
 // TO DO (important to not so important)
-// add restart button
+// add stage message (going to get harder)
 // add sound effects for buttons
 // add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
@@ -39,7 +40,8 @@ console.log("hellu it me");
 
 // ++++++++++++++++++++++++ //
 
-/* global vars */
+//// ++ GLOBAL VARS ++ ////
+
 var timer = 20; // timer to type all words
 
 var score = 0; // total score
@@ -47,7 +49,7 @@ var isPlaying = false;; // if playing or not
 
 var stage = 0; // (normal mode)
 
-/* dom grabs */
+// dom gribbity grabbity
 var wordInput = document.querySelector("#word-input");
 var currentWord = document.querySelector("#current-word");
 var showScore = document.querySelector("#score");
@@ -58,6 +60,9 @@ var startButton = document.querySelector("#start-button");
 var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
 var floatingScore = document.querySelector(".floating-score");
+var counter = 3; // countdown 3,2,1 and start game
+var gameoverScreen = document.querySelector("#gameover-screen");
+var gameoverBox = document.querySelector(".gameover-box");
 
 //// ++ BASIC FUNCTIONS ++ ////
 
@@ -87,7 +92,7 @@ function initGame () {
 function startGame() {
     showWord(words);
     floatingScore.style.visibility = "visible";
-    setInterval(countdownTimer, 1000);
+    setInterval(countdownTimer, 990);
     setInterval(checkStatus, 50);
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
@@ -97,6 +102,7 @@ function startGame() {
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
         } else {
+            // timer--;
             showMessage.innerHTML = "Not correct";
             clearInput();
         }
@@ -140,13 +146,14 @@ function showWord (words) {
 // check word match
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
-        console.log('correct');
         calculateScore();
         showWord(words);
-        console.log(score);
+        //console.log(score);
+        //console.log('correct');
         return true;
     } else {
-        console.log('no');
+        //console.log('no');
+        // adding shakey shakey animation
         setTimeout(function() {
             wordInput.classList.add("shake");
         },100);
@@ -174,12 +181,13 @@ function countdownTimer (isPlaying) {
 // check game status
 function checkStatus() {
   if (!isPlaying && timer === 0) {
-    showMessage.innerHTML = 'Game Over!!!';
+    gameoverBox.innerHTML = 'Game Over!!!';
     currentWord.textContent = " ";
     clearInput();
     wordInput.disabled = true;
         // to do: add overlay to say game over
-        // overlay.visibility = "visible";
+    gameoverScreen.style.visibility = "visible";
+    gameoverScreen.classList.add("bounce-in");
   }
 }
 
@@ -200,21 +208,18 @@ function calculateScore() {
     showScore.innerHTML = score;
 }
 
-var counter = 3; // countdown 3,2,1 and start game
 
 // to load countdown loading screen after start button is pressed
 function loadingScreen() {
     overlayScreen.style.visibility = "visible";
     startButton.style.visibility = "hidden";
     var loadCountdown = setInterval(function() {
-    counter = counter - 1;
-    //for (var i = 0; i < counter; i++) {
+        counter = counter - 1;
         console.log("print count" + counter)
         overlayBox.innerHTML = counter;
         if (counter === 0) {
             overlayBox.innerHTML = "GO"
         }
-    //}
     },1000);
 
     setTimeout(function(){
