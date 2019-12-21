@@ -10,9 +10,9 @@ console.log("hellu it me");
 // input box will nudge if incorrect answer
 // add loading (count down) screen after start button is pressed
 // disabled input once game is over
+// stage 1-4 of to do functionality
 
 // DOING
-// stage 1-4 of to do functionality
 // style correct and incorrect answers
 
 // CURRENT BUGS
@@ -29,7 +29,7 @@ console.log("hellu it me");
 // add option buttons for modes
 // highlight LETTER by letter (currentWord) as user enters
 
-// TO DO (functionality) still tbc
+// BASIC FUNCTIONALITY
 // stage 1: words less than 8 letters ( after 3 words )
 // stage 2: words less than 10 letters ( after 3 words )
 // stage 3: words less than 15 characters ( after 2 words )
@@ -108,28 +108,28 @@ function showWord (words) {
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.easy[wordIndex];
-            console.log(words.easy[wordIndex]);
+            //console.log(words.easy[wordIndex]);
         }
     } else if (stage >= 4 && stage < 7) {
         var maxWords = words.medium.length; // ALL of the objects in word.medium array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.medium[wordIndex];
-            console.log(words.medium[wordIndex]);
+            //console.log(words.medium[wordIndex]);
         }
     } else if (stage >= 7 && stage < 10) {
         var maxWords = words.hard.length; // ALL of the objects in word.hard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.hard[wordIndex];
-            console.log(words.hard[wordIndex]);
+            //console.log(words.hard[wordIndex]);
         }
-    } else if (stage >= 7 && stage < 10) {
+    } else if (stage >= 10) {
         var maxWords = words.superhard.length; // ALL of the objects in word.superhard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.superhard[wordIndex];
-            console.log(words.superhard[wordIndex]);
+            //console.log(words.superhard[wordIndex]);
         }
     }
 }
