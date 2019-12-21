@@ -16,18 +16,20 @@ body {
 
 main {
     max-width: 720px !important;
+    position: relative;
 }
 
 /* overlay screen */
 
 #overlay-screen {
-    background-color: rgb(0,0,0,0.6);
+    background-color: rgb(0,0,0,0.7);
     width: 100vw;
     height: 100vh;
     /* filter: blur(5px); */
     position: absolute;
     visibility: hidden;
     top: 0;
+    z-index: 1;
 }
 
 .overlay-box {
@@ -35,7 +37,7 @@ main {
     height: 50%;
     top: 15%;
     position: absolute;
-    font-size: 45px;
+    font-size: 120px;
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
@@ -171,14 +173,6 @@ input[disabled] {
     margin: 20px 0;
 }
 
-.icon-score {
-    background: url(img/trophy.svg) no-repeat top left;
-    width: 25px;
-    height: 25px;
-    background-size: contain;
-    display: inline-block;
-}
-
 .icon-time {
     background: url(img/time.svg) no-repeat top left;
     width: 25px;
@@ -234,21 +228,41 @@ input[disabled] {
 
 /* floating score */
 
+.icon-score {
+    background: url(img/trophy.svg) no-repeat top left;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    display: inline-block;
+}
+
+.user-score {
+    margin-top: 15px;
+    padding: 15px;
+}
+
 .floating-score {
-    font-size: 18px;
+    visibility: hidden;
+    font-size: 30px;
+    line-height: 30px;
     color: #cccccc;
     text-decoration: none;
     margin: 0 10px;
     animation: float 6s ease-in-out infinite;
-    background: rgb(255,255,255,0.6);
-    width: 100px;
-    height: 100px;
+    background: rgb(255,255,255,0.8);
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     position: absolute;
-    right: 10vw;
-    top: 40vh;
+    right: 0;
+    bottom: 0;
     color: #000000;
-    padding: 15px 10px;
+}
+
+@media screen and (min-width: 1024px) {
+    .floating-score {
+        right: -60px;
+    }
 }
 
 @keyframes float {
