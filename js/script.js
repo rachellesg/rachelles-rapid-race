@@ -12,6 +12,7 @@ console.log("hellu it me");
 // disabled input once game is over
 // stage 1-4 of basic functionality
 // add loading (game lost) screen after game is over
+// minus one second for every wrong input
 
 // DOING
 // style correct and incorrect answers
@@ -57,6 +58,8 @@ var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
 var startButton = document.querySelector("#start-button");
+var restartButton = document.querySelector("#restart-button");
+var progressBar = document.querySelector("progress");
 var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
 var floatingScore = document.querySelector(".floating-score");
@@ -77,7 +80,7 @@ function createTimeBar () {
         timeBar.classList.add("timeleft");
     var barCountdown = setInterval(function() {
         timeBar.setAttribute('value', timer);
-    },100);
+    },50);
 }
 
 // initialize game
@@ -160,6 +163,8 @@ function checkMatch() {
         setTimeout(function() {
             wordInput.classList.remove("shake");
         },200);
+        timer--;
+        console.log(timer);
         return false;
     }
         clearInput();
@@ -181,13 +186,13 @@ function countdownTimer (isPlaying) {
 // check game status
 function checkStatus() {
   if (!isPlaying && timer === 0) {
-    gameoverBox.innerHTML = 'Game Over!!!';
+    //gameoverBox.innerHTML = 'Game Over!!!';
     currentWord.textContent = " ";
+    showMessage.textContent = " ";
     clearInput();
     wordInput.disabled = true;
-        // to do: add overlay to say game over
     gameoverScreen.style.visibility = "visible";
-    gameoverScreen.classList.add("bounce-in");
+    gameoverBox.classList.add("bounce-in");
   }
 }
 
@@ -227,4 +232,12 @@ function loadingScreen() {
         clearInterval(loadCountdown);
         overlayScreen.style.visibility = "hidden";
     }, 4000);
+}
+
+// restarts game immediately
+function restartGame() {
+    gameoverScreen.style.visibility = "hidden";
+    initGame();
+    timer = 20;
+    score = 0;
 }
