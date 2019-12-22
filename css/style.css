@@ -83,7 +83,7 @@ main {
 }
 
 #gameover-screen {
-    background-color: transparent;
+    background-color: rgb(0,0,0,0.7);
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -99,8 +99,8 @@ main {
     background: #000000;
     /* top: 15%; */
     /* position: absolute; */
-    font-size: 50px;
-    line-height: 35px;
+    font-size: 40px;
+    line-height: 20px;
     color: #FFFFFF;
     margin: 15vh auto;
     display: flex;
@@ -245,19 +245,23 @@ input[disabled] {
 
 
 /* button */
-#start-button {
+#start-button,
+#restart-button {
     background: #FFFFFF;
+    font-size:18px;
     border: 0;
     padding: 10px 15px;
     box-shadow: 0px 5px #f59cb0;
     cursor: pointer;
 }
 
-#start-button:focus {
+#start-button:focus,
+#restart-button:focus {
     outline: none;
 }
 
-#start-button:hover {
+#start-button:hover,
+#restart-button:hover {
     transform: translateY(5px);
     box-shadow: 0px 3px #f59cb0;
 }
