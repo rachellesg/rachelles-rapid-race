@@ -11,23 +11,21 @@ console.log("hellu it me");
 // add loading (count down) screen after start button is pressed
 // disabled input once game is over
 // stage 1-4 of basic functionality
-// add loading (game lost) screen after game is over
+// add loading (game lost) screen with restart button after game is over
 // minus one second for every wrong input
 
 // DOING
 // style correct and incorrect answers
-// add restart button
+// add stage message (going to get harder)
+// add sound effects for buttons
 
 // CURRENT BUGS
-// unable to restart just yet
 // words may appear twice in a row
 
 // FIXED BUGS
 // score starts at 0 even after first correct input
 
 // TO DO (important to not so important)
-// add stage message (going to get harder)
-// add sound effects for buttons
 // add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
 // add option buttons for modes
@@ -151,6 +149,7 @@ function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
         calculateScore();
         showWord(words);
+        correctAnswer();
         //console.log(score);
         //console.log('correct');
         return true;
@@ -165,6 +164,7 @@ function checkMatch() {
         },200);
         timer--;
         console.log(timer);
+        incorrectAnswer();
         return false;
     }
         clearInput();
@@ -240,4 +240,16 @@ function restartGame() {
     initGame();
     timer = 20;
     score = 0;
+}
+
+// sound effect for correct answer
+function correctAnswer() {
+    var right = document.getElementById("correct");
+          right.play();
+}
+
+// sound effect for correct answer
+function incorrectAnswer() {
+    var wrong = document.getElementById("incorrect");
+          wrong.play();
 }
