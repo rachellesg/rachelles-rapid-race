@@ -14,22 +14,21 @@ console.log("hellu it me");
 // add loading (game lost) screen with restart button after game is over
 // minus one second for every wrong input
 // add sound effects for correct and incorrect answers
+// add sound effects for buttons
+// add stage message (going to get harder)
 
 // DOING
-// style correct and incorrect answers
-// add stage message (going to get harder)
-// add sound effects for buttons
+// add more modes (css) && || (javascript)
+// add option buttons for modes
 
 // CURRENT BUGS
-// words may appear twice in a row
+// words may appear twice in a row (only a bug if you want it to be lol)
 
 // FIXED BUGS
 // score starts at 0 even after first correct input
 // after restart game timer goes twice as fast
 
 // TO DO (important to not so important)
-// add more modes (css) && || (javascript)
-// add option buttons for modes
 // highlight LETTER by letter (currentWord) as user enters
 
 // BASIC FUNCTIONALITY
@@ -42,7 +41,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 20; // timer to type all words
+var timer = 45; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -87,7 +86,7 @@ function gameTimer () {
     var countdownTimer = setInterval(function(){
         isPlaying = true;
         timer--;
-        console.log(timer, isPlaying);
+        //console.log(timer, isPlaying);
       if (timer === 0) {
         isPlaying = false;
         clearInterval(countdownTimer);
@@ -127,7 +126,21 @@ function startGame() {
     if (event.keyCode === 13) {
         if (checkMatch()) {
             stage++;
-            showMessage.innerHTML = "Correct";
+            console.log(stage);
+            // have to put it here if not first correct answer = 0
+            if (stage === 3) {
+                showMessage.innerHTML = "WOW you're better than I thought";
+            } else if (stage === 5) {
+                showMessage.innerHTML = "It's only gonna get harder from here...";
+            } else if (stage === 6) {
+                showMessage.innerHTML = "You're still here!?!?!?";
+            } else if (stage === 7) {
+                showMessage.innerHTML = "Seems like I've gotta amp my game up..";
+            } else if (stage === 8) {
+                showMessage.innerHTML = "Alright here goes.... Let's see if you can do this";
+            } else if (stage === 9) {
+                showMessage.innerHTML = "";
+            }
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
         } else {
@@ -137,6 +150,14 @@ function startGame() {
         }
     }
     }
+}
+
+// restarts game immediately
+function restartGame() {
+    gameoverScreen.style.visibility = "hidden";
+    initGame();
+    timer = 45;
+    score = 0;
 }
 
 // generate words
@@ -184,14 +205,7 @@ function checkMatch() {
     } else {
         //console.log('no');
         // adding shakey shakey animation
-        setTimeout(function() {
-            wordInput.classList.add("shake");
-        },100);
-        setTimeout(function() {
-            wordInput.classList.remove("shake");
-        },200);
-        timer--;
-        console.log(timer);
+        //console.log(timer);
         incorrectAnswer();
         return false;
     }
@@ -250,26 +264,26 @@ function loadingScreen() {
     }, 4000);
 }
 
-// restarts game immediately
-function restartGame() {
-    gameoverScreen.style.visibility = "hidden";
-    initGame();
-    timer = 20;
-    score = 0;
-}
-
 //// ++ SOUNDS ++ ////
 
 // sound effect for correct answer
 function correctAnswer() {
     var right = document.getElementById("correct");
-          right.play();
+    right.play();
 }
 
 // sound effect for correct answer
 function incorrectAnswer() {
     var wrong = document.getElementById("incorrect");
-          wrong.play();
+    wrong.play();
+    setTimeout(function() {
+        wordInput.classList.add("shake");
+    },100);
+    setTimeout(function() {
+        wordInput.classList.remove("shake");
+    },200);
+    timer--;
+
 }
 
 // sound effect for buttons
