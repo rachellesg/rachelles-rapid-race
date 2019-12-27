@@ -13,6 +13,7 @@ console.log("hellu it me");
 // stage 1-4 of basic functionality
 // add loading (game lost) screen with restart button after game is over
 // minus one second for every wrong input
+// add sound effects for correct and incorrect answers
 
 // DOING
 // style correct and incorrect answers
@@ -24,9 +25,9 @@ console.log("hellu it me");
 
 // FIXED BUGS
 // score starts at 0 even after first correct input
+// after restart game timer goes twice as fast
 
 // TO DO (important to not so important)
-// add sound effects for correct and incorrect answers
 // add more modes (css) && || (javascript)
 // add option buttons for modes
 // highlight LETTER by letter (currentWord) as user enters
@@ -44,7 +45,7 @@ console.log("hellu it me");
 var timer = 20; // timer to type all words
 
 var score = 0; // total score
-var isPlaying = false;; // if playing or not
+var isPlaying = false; // if playing or not
 
 var stage = 0; // (normal mode)
 
@@ -52,6 +53,7 @@ var stage = 0; // (normal mode)
 var wordInput = document.querySelector("#word-input");
 var currentWord = document.querySelector("#current-word");
 var showScore = document.querySelector("#score");
+var timeBar = document.querySelector("#timebar");
 var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
@@ -74,15 +76,41 @@ function clearInput() {
 
 // creating top timebar
 function createTimeBar () {
-    var timeBar = document.querySelector("#timebar");
-        timeBar.classList.add("timeleft");
+    timeBar.classList.add("timeleft");
     var barCountdown = setInterval(function() {
         timeBar.setAttribute('value', timer);
-    },50);
+    },10);
 }
 
+// timery things
+function gameTimer () {
+    var countdownTimer = setInterval(function(){
+        isPlaying = true;
+        timer--;
+        console.log(timer, isPlaying);
+      if (timer === 0) {
+        isPlaying = false;
+        clearInterval(countdownTimer);
+      }
+      showTime.innerHTML = timer;
+    }, 1000);
+}
+
+// countdown timer and calculate game end
+// function countdownTimer (isPlaying) {
+//     if (timer > 0) {
+//         isPlaying = true;
+//         timer--;
+//         console.log(timer, isPlaying);
+//     } else if (timer === 0) {
+//         isPlaying = false;
+//         console.log(timer, isPlaying);
+//     }
+//     showTime.innerHTML = timer;
+// }
+
 // initialize game
-function initGame () {
+function initGame() {
     createTimeBar();
     wordInput.disabled = false;
     wordInput.focus();
@@ -92,9 +120,9 @@ function initGame () {
 // <actually> start game
 function startGame() {
     showWord(words);
-    floatingScore.style.visibility = "visible";
-    setInterval(countdownTimer, 990);
+    gameTimer();
     setInterval(checkStatus, 50);
+    floatingScore.style.visibility = "visible";
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
         if (checkMatch()) {
@@ -170,18 +198,6 @@ function checkMatch() {
         clearInput();
 }
 
-// countdown timer and calculate game end
-function countdownTimer (isPlaying) {
-    if (timer > 0) {
-        isPlaying = true;
-        timer--;
-        //console.log(timer, isPlaying);
-    } else if (timer === 0) {
-        isPlaying = false;
-        //console.log(timer, isPlaying);
-    }
-    showTime.innerHTML = timer;
-}
 
 // check game status
 function checkStatus() {
@@ -201,13 +217,13 @@ function calculateScore() {
     var wordContent = currentWord.textContent;
     var wordLength = wordContent.length;
     if (wordLength >= 15) {
-        score = score + 5;
+        score = score + 20;
         //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 10) {
-        score = score + 3;
+        score = score + 12;
         //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 5) {
-        score = score + 1;
+        score = score + 10;
         //console.log("this word is " + wordLength + " letters long");
     }
     showScore.innerHTML = score;
@@ -242,6 +258,8 @@ function restartGame() {
     score = 0;
 }
 
+//// ++ SOUNDS ++ ////
+
 // sound effect for correct answer
 function correctAnswer() {
     var right = document.getElementById("correct");
@@ -253,3 +271,13 @@ function incorrectAnswer() {
     var wrong = document.getElementById("incorrect");
           wrong.play();
 }
+
+// sound effect for buttons
+function buttonHover() {
+    var hover = document.getElementById("hoverbutton");
+    startButton.addEventListener('mouseover', function() {
+        hover.play();
+    });
+}
+
+buttonHover();
