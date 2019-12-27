@@ -121,6 +121,7 @@ function startGame() {
     showWord(words);
     gameTimer();
     setInterval(checkStatus, 50);
+    timeBar.style.visibility = "visible";
     floatingScore.style.visibility = "visible";
     wordInput.onkeypress = function(event) {
     if (event.keyCode === 13) {
@@ -128,18 +129,38 @@ function startGame() {
             stage++;
             console.log(stage);
             // have to put it here if not first correct answer = 0
-            if (stage === 3) {
-                showMessage.innerHTML = "WOW you're better than I thought";
-            } else if (stage === 5) {
-                showMessage.innerHTML = "It's only gonna get harder from here...";
-            } else if (stage === 6) {
-                showMessage.innerHTML = "You're still here!?!?!?";
-            } else if (stage === 7) {
-                showMessage.innerHTML = "Seems like I've gotta amp my game up..";
-            } else if (stage === 8) {
-                showMessage.innerHTML = "Alright here goes.... Let's see if you can do this";
-            } else if (stage === 9) {
-                showMessage.innerHTML = "";
+            // if (stage === 3) {
+            //     showMessage.innerHTML = "WOW you're better than I thought";
+            // } else if (stage === 5) {
+            //     showMessage.innerHTML = "It's only gonna get harder from here...";
+            // } else if (stage === 6) {
+            //     showMessage.innerHTML = "You're still here!?!?!?";
+            // } else if (stage === 7) {
+            //     showMessage.innerHTML = "Seems like I've gotta amp my game up..";
+            // } else if (stage === 8) {
+            //     showMessage.innerHTML = "Alright here goes.... Let's see if you can do this";
+            // } else if (stage === 9) {
+            //     showMessage.innerHTML = "";
+            // }
+            switch(stage) {
+            case 1:
+                showMessage.innerHTML = "WOW";
+            break;
+            case 3:
+                showMessage.innerHTML = "HARDER";
+            break;
+            case 6:
+                showMessage.innerHTML = "STILL HERE";
+            break;
+            case 7:
+                showMessage.innerHTML = "AMP";
+            break;
+            case 8:
+                showMessage.innerHTML = "XXX";
+            break;
+            default:
+                showMessage.innerHTML = "I have never heard of that fruit...";
+                console.log(stage);
             }
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
