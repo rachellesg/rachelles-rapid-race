@@ -120,6 +120,7 @@ main {
     width: 100%;
     background: #95d8e8;
     margin-bottom: 20px;
+    visibility: hidden;
 }
 
 progress::-webkit-progress-bar {
@@ -127,7 +128,7 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background: #efb7c0;
+    background: #7adc55;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
