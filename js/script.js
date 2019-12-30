@@ -17,9 +17,9 @@ console.log("hellu it me");
 // add sound effects for buttons
 // add stage message (going to get harder)
 // minus lifes when incorrect
+// add heart emojis to show life left
 
 // DOING
-// add heart emojis to show life left
 // add more modes (css) && || (javascript)
 // add option buttons for modes
 
@@ -31,6 +31,7 @@ console.log("hellu it me");
 // after restart game timer goes twice as fast
 
 // TO DO (important to not so important)
+// add music as game goes on
 // highlight LETTER by letter (currentWord) as user enters
 
 // BASIC FUNCTIONALITY
@@ -43,7 +44,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 10; // timer to type all words
+var timer = 45; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -71,6 +72,7 @@ var counter = 3; // countdown 3,2,1 and start game
 var gameoverScreen = document.querySelector("#gameover-screen");
 var gameoverBox = document.querySelector(".gameover-box");
 var livesLeft = document.querySelector("#lives");
+var backgroundOST = document.getElementById("background");
 
 //// ++ BASIC FUNCTIONS ++ ////
 
@@ -136,6 +138,8 @@ function initGame() {
 function startGame() {
     showWord(words);
     gameTimer();
+    backgroundOST.play();
+    backgroundOST.volume = 0.1;
     setInterval(checkStatus, 50);
     timeBar.style.visibility = "visible";
     floatingScore.style.visibility = "visible";
@@ -240,22 +244,17 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
-  if (!isPlaying && timer === 0) {
-    //gameoverBox.innerHTML = 'Game Over!!!';
-    currentWord.textContent = " ";
-    showMessage.textContent = " ";
-    clearInput();
-    wordInput.disabled = true;
-    gameoverScreen.style.visibility = "visible";
-    gameoverBox.classList.add("bounce-in");
-  } else if (life === 0) {
-    currentWord.textContent = " ";
-    showMessage.textContent = " ";
-    clearInput();
-    wordInput.disabled = true;
-    gameoverScreen.style.visibility = "visible";
-    gameoverBox.classList.add("bounce-in");
-  }
+    if ((!isPlaying && timer === 0) || life === 0) {
+        //gameoverBox.innerHTML = 'Game Over!!!';
+        currentWord.textContent = " ";
+        showMessage.textContent = " ";
+        clearInput();
+        wordInput.disabled = true;
+        gameoverScreen.style.visibility = "visible";
+        gameoverBox.classList.add("bounce-in");
+        backgroundOST.pause();
+        backgroundOST.currentTime = 0;
+    }
 }
 
 // ezpz calculate scores
