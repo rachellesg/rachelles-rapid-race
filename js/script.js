@@ -43,7 +43,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 45; // timer to type all words
+var timer = 10; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -170,6 +170,7 @@ function restartGame() {
     gameoverScreen.style.visibility = "hidden";
     initGame();
     timer = 45;
+    life = 3;
     score = 0;
 }
 
@@ -228,8 +229,15 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
-  if (!isPlaying && timer === 0 || life === 0) {
+  if (!isPlaying && timer === 0) {
     //gameoverBox.innerHTML = 'Game Over!!!';
+    currentWord.textContent = " ";
+    showMessage.textContent = " ";
+    clearInput();
+    wordInput.disabled = true;
+    gameoverScreen.style.visibility = "visible";
+    gameoverBox.classList.add("bounce-in");
+  } else if (life === 0) {
     currentWord.textContent = " ";
     showMessage.textContent = " ";
     clearInput();
@@ -295,9 +303,10 @@ function incorrectAnswer() {
     setTimeout(function() {
         wordInput.classList.remove("shake");
     },200);
-    timer--;
     life--;
-    console.log(life);
+    for (var i = 0; i < 4; i++) {
+        console.log(life);
+    }
 }
 
 // sound effect for buttons
