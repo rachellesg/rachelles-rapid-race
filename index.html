@@ -24,7 +24,10 @@
 
     <!-- gameover -->
     <div id="gameover-screen">
-        <div class="gameover-box">Game Over!!!<br><br>
+        <div class="gameover-box">
+            Game Over!!!<br>
+            Your score was
+            <br>
             <button id="restart-button" onclick="restartGame()">Restart</button>
         </div>
     </div>
@@ -78,6 +81,7 @@
         </div>
     </main>
 
+<audio id="background" src="sounds/background.mp3" autoplay="false" ></audio>
 <audio id="correct" src="sounds/correct.wav" autoplay="false" ></audio>
 <audio id="incorrect" src="sounds/incorrect.wav" autoplay="false" ></audio>
 <audio id="hoverbutton" src="sounds/button.wav" autoplay="false" ></audio>

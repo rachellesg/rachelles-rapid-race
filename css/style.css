@@ -83,7 +83,7 @@ main {
 }
 
 #gameover-screen {
-    background-color: rgb(0,0,0,0.7);
+    background-color: rgb(0,0,0,1.0);
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -95,8 +95,8 @@ main {
 .gameover-box {
     width: 400px;
     height: 400px;
-    border-radius: 50%;
-    background: #000000;
+    /*border-radius: 50%;*/
+    /*background: #000000;*/
     /* top: 15%; */
     /* position: absolute; */
     font-size: 40px;
@@ -246,6 +246,9 @@ input[disabled] {
     -ms-user-select: none; /* IE10+ */
 }
 
+#background {
+    display: none;
+}
 
 /* output message */
 #message {
