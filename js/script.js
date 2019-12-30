@@ -16,8 +16,10 @@ console.log("hellu it me");
 // add sound effects for correct and incorrect answers
 // add sound effects for buttons
 // add stage message (going to get harder)
+// minus lifes when incorrect
 
 // DOING
+// add heart emojis to show life left
 // add more modes (css) && || (javascript)
 // add option buttons for modes
 
@@ -48,6 +50,8 @@ var isPlaying = false; // if playing or not
 
 var stage = 0; // (normal mode)
 
+var life = 3;
+
 // dom gribbity grabbity
 var wordInput = document.querySelector("#word-input");
 var currentWord = document.querySelector("#current-word");
@@ -65,6 +69,7 @@ var floatingScore = document.querySelector(".floating-score");
 var counter = 3; // countdown 3,2,1 and start game
 var gameoverScreen = document.querySelector("#gameover-screen");
 var gameoverBox = document.querySelector(".gameover-box");
+var livesLeft = document.querySelector("#lives");
 
 //// ++ BASIC FUNCTIONS ++ ////
 
@@ -129,19 +134,6 @@ function startGame() {
             stage++;
             console.log(stage);
             // have to put it here if not first correct answer = 0
-            // if (stage === 3) {
-            //     showMessage.innerHTML = "WOW you're better than I thought";
-            // } else if (stage === 5) {
-            //     showMessage.innerHTML = "It's only gonna get harder from here...";
-            // } else if (stage === 6) {
-            //     showMessage.innerHTML = "You're still here!?!?!?";
-            // } else if (stage === 7) {
-            //     showMessage.innerHTML = "Seems like I've gotta amp my game up..";
-            // } else if (stage === 8) {
-            //     showMessage.innerHTML = "Alright here goes.... Let's see if you can do this";
-            // } else if (stage === 9) {
-            //     showMessage.innerHTML = "";
-            // }
             switch(stage) {
             case 1:
                 showMessage.innerHTML = "WOW";
@@ -159,14 +151,14 @@ function startGame() {
                 showMessage.innerHTML = "XXX";
             break;
             default:
-                showMessage.innerHTML = "I have never heard of that fruit...";
+                showMessage.innerHTML = "Good job...";
                 console.log(stage);
             }
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
         } else {
             // timer--;
-            showMessage.innerHTML = "Not correct";
+            showMessage.innerHTML = "I don't think that's quite right... 🧐";
             clearInput();
         }
     }
@@ -236,7 +228,7 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
-  if (!isPlaying && timer === 0) {
+  if (!isPlaying && timer === 0 || life === 0) {
     //gameoverBox.innerHTML = 'Game Over!!!';
     currentWord.textContent = " ";
     showMessage.textContent = " ";
@@ -304,7 +296,8 @@ function incorrectAnswer() {
         wordInput.classList.remove("shake");
     },200);
     timer--;
-
+    life--;
+    console.log(life);
 }
 
 // sound effect for buttons
