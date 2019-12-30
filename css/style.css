@@ -222,6 +222,14 @@ input[disabled] {
     font-weight: bold;
 }
 
+#lives {
+    margin: 20px auto;
+    font-size: 2em;
+}
+
+#lives span {
+    padding: 0 5px;
+}
 
 /* big word  */
 #current-word {
