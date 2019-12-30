@@ -50,7 +50,8 @@ var isPlaying = false; // if playing or not
 
 var stage = 0; // (normal mode)
 
-var life = 3;
+var life = 5;
+var totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
 
 // dom gribbity grabbity
 var wordInput = document.querySelector("#word-input");
@@ -76,6 +77,17 @@ var livesLeft = document.querySelector("#lives");
 // clear input
 function clearInput() {
     document.querySelector("#word-input").value = "";
+}
+
+// creating lives
+function createHealth() {
+    for (var i = 0; i < totalLives.length; i++) {
+        console.log(totalLives[i]);
+        var hearts = document.createElement("span");
+        hearts.classList.add("hearts"+[i]);
+        hearts.innerHTML = totalLives[i];
+        livesLeft.appendChild(hearts);
+    }
 }
 
 // creating top timebar
@@ -115,7 +127,6 @@ function gameTimer () {
 
 // initialize game
 function initGame() {
-    createTimeBar();
     wordInput.disabled = false;
     wordInput.focus();
     startGame();
@@ -304,9 +315,9 @@ function incorrectAnswer() {
         wordInput.classList.remove("shake");
     },200);
     life--;
-    for (var i = 0; i < 4; i++) {
-        console.log(life);
-    }
+    totalLives.pop();
+    livesLeft.innerHTML = totalLives.join("");
+    //console.log("print" + totalLives.length);
 }
 
 // sound effect for buttons
@@ -318,3 +329,5 @@ function buttonHover() {
 }
 
 buttonHover();
+createTimeBar();
+createHealth();
