@@ -93,14 +93,14 @@ main {
 }
 
 .gameover-box {
-    width: 400px;
+    width: 500px;
     height: 400px;
     /*border-radius: 50%;*/
     /*background: #000000;*/
     /* top: 15%; */
     /* position: absolute; */
-    font-size: 40px;
-    line-height: 20px;
+    font-size: 20px;
+    /*line-height: 35px;*/
     color: #FFFFFF;
     margin: 15vh auto;
     display: flex;
@@ -258,7 +258,8 @@ input[disabled] {
 
 /* button */
 #start-button,
-#restart-button {
+#restart-button,
+button {
     background: #FFFFFF;
     font-size:18px;
     border: 0;
@@ -268,12 +269,14 @@ input[disabled] {
 }
 
 #start-button:focus,
-#restart-button:focus {
+#restart-button:focus,
+button:focus {
     outline: none;
 }
 
 #start-button:hover,
-#restart-button:hover {
+#restart-button:hover,
+button:hover {
     transform: translateY(5px);
     box-shadow: 0px 3px #f59cb0;
 }
@@ -294,6 +297,7 @@ input[disabled] {
 }
 
 .floating-score {
+    z-index: 1;
     visibility: hidden;
     font-size: 30px;
     line-height: 30px;
