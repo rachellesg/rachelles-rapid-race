@@ -54,7 +54,6 @@ var stage = 0; // (normal mode)
 var life = 5;
 var totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
 
-var modes = ["words", "css"];
 var chosenModes;
 
 // dom gribbity grabbity
@@ -144,14 +143,16 @@ function initGame() {
     startGame();
 }
 
-// select mode
-function normalMode () {
-    console.log("normal clicked")
-}
+// // select mode
+// function normalMode () {
+//     chosenModes = 1;
+//     console.log("normal clicked" + chosenModes)
+// }
 
-function cssMode () {
-    console.log("css clicked")
-}
+// function cssMode () {
+//     chosenModes = 2;
+//     console.log("css clicked" + chosenModes)
+// }
 
 // <actually> start game
 function startGame() {
@@ -166,7 +167,7 @@ function startGame() {
     if (event.keyCode === 13) {
         if (checkMatch()) {
             stage++;
-            console.log(stage);
+            //console.log(stage);
             // have to put it here if not first correct answer = 0
             switch(stage) {
             case 1:
@@ -186,7 +187,7 @@ function startGame() {
             break;
             default:
                 showMessage.innerHTML = "Good job...";
-                console.log(stage);
+                //console.log(stage);
             }
             // console.log("user stage" + stage); // tested and stage works
             clearInput();
@@ -381,7 +382,6 @@ function buttonHover() {
             hover.play();
         });
     });
-
 }
 
 buttonHover();
