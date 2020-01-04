@@ -85,3 +85,45 @@ var words = {
         'ribonucleoproteins'
     ],
 };
+
+var css = {
+    'easy':[
+        'display: none;',
+        'display: block;',
+        'display: inline-block;',
+        'float: right;',
+        'float: left;',
+        'float: none;',
+    ],
+
+    'medium':[
+        'font-style: italic;',
+        'text-align: center;',
+        'text-align: left;',
+        'text-align: right;',
+        'text-align: justify;',
+    ],
+
+    'hard':[
+        'margin: 0px 12px 8px 4px;',
+        'text-decoration: line-through;',
+        'display: table-row-group;',
+        'list-style-type: disc;',
+    ],
+
+    'superhard': [
+        'radionuclide',
+        'repellencies',
+        'rhizospheres',
+        'reconnaissance',
+        'reflectivities',
+        'repudiationist',
+        'rumormongering',
+        'rhombencephalon',
+        'retinoblastimas',
+        'radiosensitivities',
+        'radiochromatograms',
+        'roentgenologically',
+        'ribonucleoproteins'
+    ],
+};

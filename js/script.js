@@ -16,8 +16,9 @@ console.log("hellu it me");
 // add sound effects for correct and incorrect answers
 // add sound effects for buttons
 // add stage message (going to get harder)
-// minus lifes when incorrect
+// minus lives when incorrect
 // add heart emojis to show life left
+// add music as game goes on
 
 // DOING
 // add more modes (css) && || (javascript)
@@ -31,7 +32,6 @@ console.log("hellu it me");
 // after restart game timer goes twice as fast
 
 // TO DO (important to not so important)
-// add music as game goes on
 // highlight LETTER by letter (currentWord) as user enters
 
 // BASIC FUNCTIONALITY
@@ -54,6 +54,9 @@ var stage = 0; // (normal mode)
 var life = 5;
 var totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
 
+var modes = ["words", "css"];
+var chosenModes;
+
 // dom gribbity grabbity
 var wordInput = document.querySelector("#word-input");
 var currentWord = document.querySelector("#current-word");
@@ -62,15 +65,23 @@ var timeBar = document.querySelector("#timebar");
 var showTime = document.querySelector("#time");
 var showMessage = document.querySelector("#message");
 var showSeconds = document.querySelector("#seconds");
+
+// grab buttons
 var startButton = document.querySelector("#start-button");
 var restartButton = document.querySelector("#restart-button");
+var normalModeButton = document.querySelector("#normal-mode-button");
+var cssModeButton = document.querySelector("#css-mode-button");
+
+// grab bar
 var progressBar = document.querySelector("progress");
 var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
-var floatingScore = document.querySelector(".floating-score");
-var counter = 3; // countdown 3,2,1 and start game
 var gameoverScreen = document.querySelector("#gameover-screen");
 var gameoverBox = document.querySelector(".gameover-box");
+
+
+var floatingScore = document.querySelector(".floating-score");
+var counter = 3; // countdown 3,2,1 and start game
 var livesLeft = document.querySelector("#lives");
 var backgroundOST = document.getElementById("background");
 
@@ -84,7 +95,6 @@ function clearInput() {
 // creating lives
 function createHealth() {
     for (var i = 0; i < totalLives.length; i++) {
-        console.log(totalLives[i]);
         var hearts = document.createElement("span");
         hearts.classList.add("hearts"+[i]);
         hearts.innerHTML = totalLives[i];
@@ -134,6 +144,15 @@ function initGame() {
     startGame();
 }
 
+// select mode
+function normalMode () {
+    console.log("normal clicked")
+}
+
+function cssMode () {
+    console.log("css clicked")
+}
+
 // <actually> start game
 function startGame() {
     showWord(words);
@@ -151,19 +170,19 @@ function startGame() {
             // have to put it here if not first correct answer = 0
             switch(stage) {
             case 1:
-                showMessage.innerHTML = "WOW";
+                showMessage.innerHTML = "Not too bad....";
             break;
-            case 3:
-                showMessage.innerHTML = "HARDER";
-            break;
-            case 6:
-                showMessage.innerHTML = "STILL HERE";
+            case 4:
+                showMessage.innerHTML = "Doing well so far hey!";
             break;
             case 7:
-                showMessage.innerHTML = "AMP";
+                showMessage.innerHTML = "It's just gonna get harder from here!";
             break;
-            case 8:
-                showMessage.innerHTML = "XXX";
+            case 10:
+                showMessage.innerHTML = "Wow ok you're still here 🤨";
+            break;
+            case 12:
+                showMessage.innerHTML = "Don't say I neh warn you,,,, from here on it's REALLY gonna get supercalifragileistically HARDER!";
             break;
             default:
                 showMessage.innerHTML = "Good job...";
@@ -187,6 +206,39 @@ function restartGame() {
     timer = 45;
     life = 3;
     score = 0;
+}
+
+// generate CSS words
+function showCssWord (css) {
+    if (stage < 4) {
+        var maxWords = css.easy.length; // ALL of the objects in word.easy array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = css.easy[wordIndex];
+            //console.log(words.easy[wordIndex]);
+        }
+    } else if (stage >= 4 && stage < 7) {
+        var maxWords = css.medium.length; // ALL of the objects in word.medium array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = css.medium[wordIndex];
+            //console.log(words.medium[wordIndex]);
+        }
+    } else if (stage >= 7 && stage < 10) {
+        var maxWords = css.hard.length; // ALL of the objects in word.hard array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = css.hard[wordIndex];
+            //console.log(words.hard[wordIndex]);
+        }
+    } else if (stage >= 10) {
+        var maxWords = css.superhard.length; // ALL of the objects in word.superhard array
+        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
+        for (var i = 0; i <= wordIndex; i++) {
+            currentWord.textContent = css.superhard[wordIndex];
+            //console.log(words.superhard[wordIndex]);
+        }
+    }
 }
 
 // generate words
@@ -322,9 +374,14 @@ function incorrectAnswer() {
 // sound effect for buttons
 function buttonHover() {
     var hover = document.getElementById("hoverbutton");
-    startButton.addEventListener('mouseover', function() {
-        hover.play();
+    var buttons = document.querySelectorAll("button");
+    buttons.forEach(function(item) {
+        item.addEventListener("mouseover", function() {
+            //this function does stuff
+            hover.play();
+        });
     });
+
 }
 
 buttonHover();
