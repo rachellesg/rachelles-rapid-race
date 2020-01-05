@@ -143,20 +143,24 @@ function initGame() {
     startGame();
 }
 
-// // select mode
-// function normalMode () {
-//     chosenModes = 1;
-//     console.log("normal clicked" + chosenModes)
-// }
+// select mode
+function normalMode () {
+    chosenModes = 1;
+    console.log("normal clicked" + chosenModes)
+}
 
-// function cssMode () {
-//     chosenModes = 2;
-//     console.log("css clicked" + chosenModes)
-// }
+function cssMode () {
+    chosenModes = 2;
+    console.log("css clicked" + chosenModes)
+}
 
 // <actually> start game
 function startGame() {
-    showWord(words);
+    if (chosenModes === 1) {
+        showWord(words);
+    } else if (chosenModes === 2) {
+        showCssWord(css);
+    }
     gameTimer();
     backgroundOST.play();
     backgroundOST.volume = 0.1;
@@ -279,7 +283,11 @@ function showWord (words) {
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
         calculateScore();
-        showWord(words);
+        if (chosenModes === 1) {
+            showWord(words);
+        } else if (chosenModes === 2) {
+            showCssWord(css);
+        }
         correctAnswer();
         //console.log(score);
         //console.log('correct');
