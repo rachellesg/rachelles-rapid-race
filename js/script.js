@@ -46,7 +46,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 45; // timer to type all words
+var timer = 30; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -128,7 +128,7 @@ function gameTimer () {
       if ((timer === 0) || (life === 0) || (stage === 999)) {
         isPlaying = false;
         checkStatus();
-        timer = 45;
+        timer = 30;
         clearInterval(countdownTimer);
         console.log(timer);
       }
@@ -205,7 +205,8 @@ function startGame() {
     createTimeBar();
     console.log(timer);
     backgroundOST.play();
-    backgroundOST.volume = 0.1;
+    backgroundOST.volume = 0.3;
+    isPlaying = true;
     setInterval(checkStatus, 50);
     gamePlayScreen.style.visibility = "visible";
     timeBar.style.visibility = "visible";
@@ -267,7 +268,7 @@ function totalRestart() {
     isPlaying = false;
     gameoverScreen.style.visibility = "hidden";
     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
-    timer = 45;
+    timer = 30;
     life = 5;
     counter = 3;
     showScore.innerHTML = "0";
@@ -395,9 +396,9 @@ function loadingScreen() {
         overlayBox.innerHTML = counter;
         if (counter === 0) {
             overlayBox.innerHTML = "GO";
+            counter = 4;
         }
     }, 1000);
-
     setTimeout(function(){
         initGame();
         clearInterval(loadCountdown);
@@ -412,6 +413,7 @@ function loadingScreen() {
 function gameOverSound() {
     var gameOverSfx = document.getElementById("gameover");
     gameOverSfx.play();
+    gameOverSfx.loop = false;
 }
 
 // sound effect for gameover
@@ -424,9 +426,9 @@ function countdownBeep() {
 function correctAnswer() {
     var right = document.getElementById("correct");
     right.play();
-    timer = timer + 1;
-    if (timer > 45) {
-        timer = 45;
+    timer = timer + 3;
+    if (timer > 30) {
+        timer = 30;
     }
 }
 
