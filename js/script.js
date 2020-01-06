@@ -323,13 +323,9 @@ function checkMatch() {
         calculateScore();
         showWord(words);
         correctAnswer();
-        //console.log(score);
-        //console.log('correct');
         return true;
     } else {
-        //console.log('no');
         // adding shakey shakey animation
-        //console.log(timer);
         incorrectAnswer();
         return false;
     }
@@ -340,6 +336,7 @@ function checkMatch() {
 // check game status
 function checkStatus() {
     if ((!isPlaying && timer === 0) || (life === 0) || (timer === 0)) {
+        gameOverSound();
         //gameoverBox.innerHTML = 'Game Over!!!';
         currentWord.textContent = " ";
         showMessage.textContent = " ";
@@ -391,25 +388,37 @@ function loadingScreen() {
     gamePlayScreen.style.display = "block";
     buttons.style.display = "none";
     overlayScreen.style.visibility = "visible";
+    countdownBeep();
     var loadCountdown = setInterval(function() {
         counter = counter - 1;
         console.log("print count" + counter)
         overlayBox.innerHTML = counter;
         if (counter === 0) {
-            overlayBox.innerHTML = "GO"
-            counter = 4;
+            overlayBox.innerHTML = "GO";
         }
-    },1000);
+    }, 1000);
 
     setTimeout(function(){
         initGame();
         clearInterval(loadCountdown);
         overlayScreen.style.visibility = "hidden";
-    }, 3000);
+    }, 4000);
     wordInput.focus();
 }
 
 //// ++ SOUNDS ++ ////
+
+// sound effect for gameover
+function gameOverSound() {
+    var gameOverSfx = document.getElementById("gameover");
+    gameOverSfx.play();
+}
+
+// sound effect for gameover
+function countdownBeep() {
+    var countdownbeep = document.getElementById("countdownbeep");
+    countdownbeep.play();
+}
 
 // sound effect for correct answer
 function correctAnswer() {
