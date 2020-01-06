@@ -32,7 +32,7 @@ console.log("hellu it me");
 // after restart game timer goes twice as fast
 
 // TO DO (important to not so important)
-// highlight LETTER by letter (currentWord) as user enters
+// add true RESTART button where user can choose modes
 
 // BASIC FUNCTIONALITY
 // stage 1: words less than 8 letters ( after first 3 words )
@@ -44,7 +44,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 45; // timer to type all words
+var timer = 4; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -74,6 +74,7 @@ var modesMessage = document.querySelector("#option-message");
 var normalModeButton = document.querySelector("#normal-mode-button");
 var cssModeButton = document.querySelector("#css-mode-button");
 var backButton = document.querySelector("#back-button");
+var endButton = document.querySelector("#end-button");
 
 // grab bar
 var progressBar = document.querySelector("progress");
@@ -120,13 +121,17 @@ function gameTimer () {
     var countdownTimer = setInterval(function(){
         isPlaying = true;
         timer--;
-        //console.log(timer, isPlaying);
-      if (timer === 0) {
+        console.log(timer, isPlaying);
+      if (timer === 0 || life === 0) {
         isPlaying = false;
+        timer = 4;
+        checkStatus();
         clearInterval(countdownTimer);
+        console.log(timer);
       }
       showTime.innerHTML = timer;
     }, 1000);
+    console.log(timer);
 }
 
 // countdown timer and calculate game end
@@ -179,6 +184,18 @@ function rechooseModes() {
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
+function endGame () {
+    currentWord.textContent = " ";
+    showMessage.textContent = " ";
+    clearInput();
+    wordInput.disabled = true;
+    gameoverScreen.style.visibility = "visible";
+    gameoverBox.classList.add("bounce-in");
+    backgroundOST.pause();
+    backgroundOST.currentTime = 0;
+    endGameScore();
+}
+
 // <actually> start game
 function startGame() {
     if (chosenModes === 1) {
@@ -187,6 +204,7 @@ function startGame() {
         showCssWord(css);
     }
     gameTimer();
+    console.log(timer);
     backgroundOST.play();
     backgroundOST.volume = 0.1;
     setInterval(checkStatus, 50);
@@ -196,6 +214,7 @@ function startGame() {
     if (event.keyCode === 13) {
         if (checkMatch()) {
             stage++;
+            console.log(timer);
             //console.log(stage);
             // have to put it here if not first correct answer = 0
             switch(stage) {
@@ -233,9 +252,13 @@ function startGame() {
 function restartGame() {
     gameoverScreen.style.visibility = "hidden";
     initGame();
-    timer = 45;
-    life = 3;
+    timer = 4;
+    totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+    life = 5;
     score = 0;
+    console.log(timer);
+    console.log(totalLives);
+    createHealth();
 }
 
 // generate CSS words
@@ -330,7 +353,7 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
-    if ((!isPlaying && timer === 0) || life === 0) {
+    if ((!isPlaying && timer === 0) || (life === 0) || (timer === 0)) {
         //gameoverBox.innerHTML = 'Game Over!!!';
         currentWord.textContent = " ";
         showMessage.textContent = " ";
@@ -340,13 +363,18 @@ function checkStatus() {
         gameoverBox.classList.add("bounce-in");
         backgroundOST.pause();
         backgroundOST.currentTime = 0;
-        if (score <= 50) {
-            gameoverMessage.innerHTML = "Wow you're horrible at this.... 👎🏻<br>You got " + score + " points";
-        } else if (score > 50 && score <= 99) {
-            gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
-        } else if (score >= 100 && score < 150) {
-            gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
-        }
+        endGameScore();
+        totalLives = [];
+    }
+}
+
+function endGameScore() {
+    if (score <= 50) {
+        gameoverMessage.innerHTML = "Wow you're horrible at this.... 👎🏻<br>You got " + score + " points";
+    } else if (score > 50 && score <= 99) {
+        gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
+    } else if (score >= 100 && score < 150) {
+        gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
     }
 }
 

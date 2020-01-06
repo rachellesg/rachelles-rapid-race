@@ -90,11 +90,11 @@ var css = {
     'easy':[
         'width: 100px;',
         'height: 100px;',
-        'margin: auto',
+        'margin: auto;',
         'display: none;',
         'display: block;',
         'display: table;',
-        'display: flex',
+        'display: flex;',
         'float: right;',
         'float: left;',
         'float: none;',
@@ -113,9 +113,9 @@ var css = {
         'text-align: right;',
         'text-align: justify;',
         'border: 1px solid black;',
-        'list-style: none',
-        'position: absolute',
-        'position: relative',
+        'list-style: none;',
+        'position: absolute;',
+        'position: relative;',
         'position: fixed;',
         'visibility: hidden;',
         'font-weight: bold;',
@@ -123,6 +123,7 @@ var css = {
         'font-weight: 400;',
         'font-weight: 500;',
         'font-weight: normal;',
+        'border-radius: 50%;'
     ],
 
     'hard':[
@@ -137,7 +138,7 @@ var css = {
     ],
 
     'superhard': [
-        'box-shadow: 0px 5px #000000',
+        'box-shadow: 0px 5px #000000;',
         'transform: translateY(5px);',
         'animation-timing-function: ease-in;',
         'border-right-color: transparent;',
