@@ -73,6 +73,7 @@ var restartButton = document.querySelector("#restart-button");
 var modesMessage = document.querySelector("#option-message");
 var normalModeButton = document.querySelector("#normal-mode-button");
 var cssModeButton = document.querySelector("#css-mode-button");
+var backButton = document.querySelector("#back-button");
 
 // grab bar
 var progressBar = document.querySelector("progress");
@@ -80,6 +81,7 @@ var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
 var gameoverScreen = document.querySelector("#gameover-screen");
 var gameoverBox = document.querySelector(".gameover-box");
+var gameoverMessage = document.querySelector(".gameover-message");
 var gamePlayScreen = document.querySelector("#gameplay-screen");
 
 
@@ -150,20 +152,31 @@ function initGame() {
 // select mode
 function normalMode () {
     chosenModes = 1;
-    startButton.style.display = "block";
+    backButton.style.display = "inline-block";
+    startButton.style.display = "inline-block";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.style.visibility = "hidden";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3> In this mode you'll be typing words that start with 'R'... Press the button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
 function cssMode () {
     chosenModes = 2;
-    startButton.style.display = "block";
+    backButton.style.display = "inline-block";
+    startButton.style.display = "inline-block";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.style.visibility = "hidden";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">CSS</span></h3> In this mode you'll be typing CSS properties along with their values... Press the button to begin the game!<br><br>";
     console.log("css clicked" + chosenModes);
+}
+
+function rechooseModes() {
+    chosenModes = null;
+    cssModeButton.style.display = "inline-block";
+    normalModeButton.style.display = "inline-block";
+    startButton.style.display = "none";
+    backButton.style.display = "none";
+    modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
 // <actually> start game
@@ -327,6 +340,13 @@ function checkStatus() {
         gameoverBox.classList.add("bounce-in");
         backgroundOST.pause();
         backgroundOST.currentTime = 0;
+        if (score <= 50) {
+            gameoverMessage.innerHTML = "Wow you're horrible at this.... 👎🏻<br>You got " + score + " points";
+        } else if (score > 50 && score <= 99) {
+            gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
+        } else if (score >= 100 && score < 150) {
+            gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
+        }
     }
 }
 
