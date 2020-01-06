@@ -209,6 +209,10 @@ input[disabled] {
 
 /* regular elements */
 
+.selected {
+    background: white;
+}
+
 /* dashboard */
 .user-dashboard {
     margin: 20px 0;
@@ -269,13 +273,19 @@ input[disabled] {
     text-align: center;
     /*background: rgb(255,255,255,0.4);*/
     /*padding: 20px;*/
-    width: 50%;
+    width: 60%;
 }
 
 #start-button {
     display: none;
     margin: 0 auto;
     text-align: center;
+}
+
+#back-button {
+    display: none;
+    background: #eeeeee;
+    box-shadow: 0px 5px #888888;
 }
 
 #start-button,
@@ -318,7 +328,6 @@ button:hover {
 }
 
 .floating-score {
-    z-index: 1;
     visibility: hidden;
     font-size: 30px;
     line-height: 30px;
