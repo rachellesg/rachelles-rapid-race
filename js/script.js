@@ -27,6 +27,7 @@ console.log("hellu it me");
 
 // CURRENT BUGS
 // words may appear twice in a row (only a bug if you want it to be lol)
+//
 
 // FIXED BUGS
 // score starts at 0 even after first correct input
@@ -123,7 +124,7 @@ function gameTimer () {
         isPlaying = true;
         timer--;
         console.log(timer, isPlaying);
-      if ((timer === 0) || (life === 0) || (stage === -1)) {
+      if ((timer === 0) || (life === 0) || (stage === 999)) {
         isPlaying = false;
         checkStatus();
         timer = 45;
@@ -205,6 +206,7 @@ function endGame () {
 
 // <actually> start game
 function startGame() {
+    wordInput.focus();
     if (chosenModes === 1) {
         showWord(words);
     } else if (chosenModes === 2) {
@@ -212,6 +214,9 @@ function startGame() {
     }
     gameTimer();
     stage = 0;
+    score = 0;
+    createHealth();
+    createTimeBar();
     console.log(timer);
     backgroundOST.play();
     backgroundOST.volume = 0.1;
@@ -240,7 +245,7 @@ function startGame() {
                 showMessage.innerHTML = "Wow ok you're still here 🤨";
             break;
             case 12:
-                showMessage.innerHTML = "Don't say I neh warn you,,,, from here on it's REALLY gonna get supercalifragileistically HARDER!";
+                showMessage.innerHTML = "From here on it's REALLY gonna get supercalifragileistically HARDER!";
             break;
             default:
                 showMessage.innerHTML = "Good job...";
@@ -257,19 +262,19 @@ function startGame() {
     }
 }
 
-// restarts game immediately
-function restartGame() {
-    gameoverScreen.style.visibility = "hidden";
-    initGame();
-    timer = 45;
-    totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
-    life = 5;
-    score = 0;
-    counter = 3;
-    livesLeft.innerHTML = totalLives.join("");
-    console.log(timer);
-    console.log(totalLives);
-}
+// // restarts game immediately
+// function restartGame() {
+//     gameoverScreen.style.visibility = "hidden";
+//     initGame();
+//     timer = 45;
+//     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+//     life = 5;
+//     score = 0;
+//     counter = 3;
+//     livesLeft.innerHTML = totalLives.join("");
+//     console.log(timer);
+//     console.log(totalLives);
+// }
 
 function totalRestart() {
     chosenModes = null;
@@ -278,17 +283,18 @@ function totalRestart() {
     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
     timer = 45;
     life = 5;
-    score = 0;
-    stage = -1;
     counter = 3;
+    showScore.innerHTML = "0";
+    livesLeft.innerHTML = "";
     buttons.style.display = "block";
-    gamePlayScreen.style.visibility = "hidden";
+    gamePlayScreen.style.display = "none";
     startButton.style.display = "none";
     backButton.style.display = "none";
     timeBar.style.visibility = "hidden";
     floatingScore.style.visibility = "hidden";
     cssModeButton.style.display = "inline-block";
     normalModeButton.style.display = "inline-block";
+    gameoverBox.classList.remove("bounce-in");
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
@@ -301,21 +307,21 @@ function showCssWord (css) {
             currentWord.textContent = css.easy[wordIndex];
             //console.log(words.easy[wordIndex]);
         }
-    } else if (stage >= 4 && stage < 7) {
+    } else if (stage >= 4 && stage < 12) {
         var maxWords = css.medium.length; // ALL of the objects in word.medium array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = css.medium[wordIndex];
             //console.log(words.medium[wordIndex]);
         }
-    } else if (stage >= 7 && stage < 10) {
+    } else if (stage >= 12 && stage < 20) {
         var maxWords = css.hard.length; // ALL of the objects in word.hard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = css.hard[wordIndex];
             //console.log(words.hard[wordIndex]);
         }
-    } else if (stage >= 10) {
+    } else if (stage >= 20) {
         var maxWords = css.superhard.length; // ALL of the objects in word.superhard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
@@ -334,21 +340,21 @@ function showWord (words) {
             currentWord.textContent = words.easy[wordIndex];
             //console.log(words.easy[wordIndex]);
         }
-    } else if (stage >= 4 && stage < 7) {
+    } else if (stage >= 4 && stage < 12) {
         var maxWords = words.medium.length; // ALL of the objects in word.medium array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.medium[wordIndex];
             //console.log(words.medium[wordIndex]);
         }
-    } else if (stage >= 7 && stage < 10) {
+    } else if (stage >= 12 && stage < 20) {
         var maxWords = words.hard.length; // ALL of the objects in word.hard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
             currentWord.textContent = words.hard[wordIndex];
             //console.log(words.hard[wordIndex]);
         }
-    } else if (stage >= 10) {
+    } else if (stage >= 20) {
         var maxWords = words.superhard.length; // ALL of the objects in word.superhard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
@@ -396,6 +402,7 @@ function checkStatus() {
         backgroundOST.currentTime = 0;
         endGameScore();
         totalLives = [];
+        stage = 999;
         timeBar.style.visibility = "hidden";
     }
 }
@@ -407,6 +414,8 @@ function endGameScore() {
         gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
     } else if (score >= 100 && score < 150) {
         gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
+    } else if (score >= 150) {
+        gameoverMessage.innerHTML = "Ok....... <br>You got " + score + " points";
     }
 }
 
@@ -439,6 +448,7 @@ function loadingScreen() {
         overlayBox.innerHTML = counter;
         if (counter === 0) {
             overlayBox.innerHTML = "GO"
+            counter = 4;
         }
     },1000);
 
@@ -446,7 +456,8 @@ function loadingScreen() {
         initGame();
         clearInterval(loadCountdown);
         overlayScreen.style.visibility = "hidden";
-    }, 4000);
+    }, 3000);
+    wordInput.focus();
 }
 
 //// ++ SOUNDS ++ ////
@@ -455,6 +466,10 @@ function loadingScreen() {
 function correctAnswer() {
     var right = document.getElementById("correct");
     right.play();
+    timer = timer + 1;
+    if (timer > 45) {
+        timer = 45;
+    }
 }
 
 // sound effect for correct answer
@@ -486,5 +501,3 @@ function buttonHover() {
 }
 
 buttonHover();
-createHealth();
-createTimeBar();
