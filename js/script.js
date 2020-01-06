@@ -68,6 +68,9 @@ var showSeconds = document.querySelector("#seconds");
 // grab buttons
 var startButton = document.querySelector("#start-button");
 var restartButton = document.querySelector("#restart-button");
+
+// options
+var modesMessage = document.querySelector("#option-message");
 var normalModeButton = document.querySelector("#normal-mode-button");
 var cssModeButton = document.querySelector("#css-mode-button");
 
@@ -77,6 +80,7 @@ var overlayScreen = document.querySelector("#overlay-screen");
 var overlayBox = document.querySelector(".overlay-box");
 var gameoverScreen = document.querySelector("#gameover-screen");
 var gameoverBox = document.querySelector(".gameover-box");
+var gamePlayScreen = document.querySelector("#gameplay-screen");
 
 
 var floatingScore = document.querySelector(".floating-score");
@@ -146,12 +150,20 @@ function initGame() {
 // select mode
 function normalMode () {
     chosenModes = 1;
-    console.log("normal clicked" + chosenModes)
+    startButton.style.display = "block";
+    cssModeButton.style.display = "none";
+    normalModeButton.style.display = "none";
+    modesMessage.style.visibility = "hidden";
+    console.log("normal clicked" + chosenModes);
 }
 
 function cssMode () {
     chosenModes = 2;
-    console.log("css clicked" + chosenModes)
+    startButton.style.display = "block";
+    cssModeButton.style.display = "none";
+    normalModeButton.style.display = "none";
+    modesMessage.style.visibility = "hidden";
+    console.log("css clicked" + chosenModes);
 }
 
 // <actually> start game
@@ -338,6 +350,8 @@ function calculateScore() {
 
 // to load countdown loading screen after start button is pressed
 function loadingScreen() {
+    gamePlayScreen.style.display = "block";
+    buttons.style.display = "none";
     overlayScreen.style.visibility = "visible";
     startButton.style.visibility = "hidden";
     var loadCountdown = setInterval(function() {
