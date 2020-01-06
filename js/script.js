@@ -19,10 +19,11 @@ console.log("hellu it me");
 // minus lives when incorrect
 // add heart emojis to show life left
 // add music as game goes on
-
-// DOING
 // add more modes (css) && || (javascript)
 // add option buttons for modes
+
+// DOING
+// add countdown sfx
 
 // CURRENT BUGS
 // words may appear twice in a row (only a bug if you want it to be lol)
@@ -44,7 +45,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 4; // timer to type all words
+var timer = 45; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -122,10 +123,10 @@ function gameTimer () {
         isPlaying = true;
         timer--;
         console.log(timer, isPlaying);
-      if (timer === 0 || life === 0) {
+      if ((timer === 0) || (life === 0)) {
         isPlaying = false;
-        timer = 4;
         checkStatus();
+        timer = 45;
         clearInterval(countdownTimer);
         console.log(timer);
       }
@@ -152,6 +153,8 @@ function initGame() {
     wordInput.disabled = false;
     wordInput.focus();
     startGame();
+    createHealth();
+    createTimeBar();
 }
 
 // select mode
@@ -194,6 +197,8 @@ function endGame () {
     backgroundOST.pause();
     backgroundOST.currentTime = 0;
     endGameScore();
+    timer = 0;
+    isPlaying = false;
 }
 
 // <actually> start game
@@ -252,13 +257,13 @@ function startGame() {
 function restartGame() {
     gameoverScreen.style.visibility = "hidden";
     initGame();
-    timer = 4;
+    timer = 45;
     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
     life = 5;
     score = 0;
+    livesLeft.innerHTML = totalLives.join("");
     console.log(timer);
     console.log(totalLives);
-    createHealth();
 }
 
 // generate CSS words
@@ -455,5 +460,3 @@ function buttonHover() {
 }
 
 buttonHover();
-createTimeBar();
-createHealth();
