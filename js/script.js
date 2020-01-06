@@ -57,6 +57,7 @@ var life = 5;
 var totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
 
 var chosenModes;
+var selectedMode;
 
 // dom gribbity grabbity
 var wordInput = document.querySelector("#word-input");
@@ -136,19 +137,6 @@ function gameTimer () {
     console.log(timer);
 }
 
-// countdown timer and calculate game end
-// function countdownTimer (isPlaying) {
-//     if (timer > 0) {
-//         isPlaying = true;
-//         timer--;
-//         console.log(timer, isPlaying);
-//     } else if (timer === 0) {
-//         isPlaying = false;
-//         console.log(timer, isPlaying);
-//     }
-//     showTime.innerHTML = timer;
-// }
-
 // initialize game
 function initGame() {
     wordInput.disabled = false;
@@ -159,6 +147,7 @@ function initGame() {
 // select mode
 function normalMode () {
     chosenModes = 1;
+    selectedMode = words;
     stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
@@ -170,6 +159,7 @@ function normalMode () {
 
 function cssMode () {
     chosenModes = 2;
+    selectedMode = css;
     stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
@@ -207,11 +197,7 @@ function endGame () {
 // <actually> start game
 function startGame() {
     wordInput.focus();
-    if (chosenModes === 1) {
-        showWord(words);
-    } else if (chosenModes === 2) {
-        showCssWord(css);
-    }
+    showWord(words);
     gameTimer();
     stage = 0;
     score = 0;
@@ -298,67 +284,34 @@ function totalRestart() {
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
-// generate CSS words
-function showCssWord (css) {
-    if (stage < 4) {
-        var maxWords = css.easy.length; // ALL of the objects in word.easy array
-        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = css.easy[wordIndex];
-            //console.log(words.easy[wordIndex]);
-        }
-    } else if (stage >= 4 && stage < 12) {
-        var maxWords = css.medium.length; // ALL of the objects in word.medium array
-        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = css.medium[wordIndex];
-            //console.log(words.medium[wordIndex]);
-        }
-    } else if (stage >= 12 && stage < 20) {
-        var maxWords = css.hard.length; // ALL of the objects in word.hard array
-        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = css.hard[wordIndex];
-            //console.log(words.hard[wordIndex]);
-        }
-    } else if (stage >= 20) {
-        var maxWords = css.superhard.length; // ALL of the objects in word.superhard array
-        var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = css.superhard[wordIndex];
-            //console.log(words.superhard[wordIndex]);
-        }
-    }
-}
-
 // generate words
-function showWord (words) {
+function showWord (words,css) {
     if (stage < 4) {
-        var maxWords = words.easy.length; // ALL of the objects in word.easy array
+        var maxWords = selectedMode.easy.length; // ALL of the objects in word.easy array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = words.easy[wordIndex];
+            currentWord.textContent = selectedMode.easy[wordIndex];
             //console.log(words.easy[wordIndex]);
         }
     } else if (stage >= 4 && stage < 12) {
-        var maxWords = words.medium.length; // ALL of the objects in word.medium array
+        var maxWords = selectedMode.medium.length; // ALL of the objects in word.medium array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = words.medium[wordIndex];
+            currentWord.textContent = selectedMode.medium[wordIndex];
             //console.log(words.medium[wordIndex]);
         }
     } else if (stage >= 12 && stage < 20) {
-        var maxWords = words.hard.length; // ALL of the objects in word.hard array
+        var maxWords = selectedMode.hard.length; // ALL of the objects in word.hard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = words.hard[wordIndex];
+            currentWord.textContent = selectedMode.hard[wordIndex];
             //console.log(words.hard[wordIndex]);
         }
     } else if (stage >= 20) {
-        var maxWords = words.superhard.length; // ALL of the objects in word.superhard array
+        var maxWords = selectedMode.superhard.length; // ALL of the objects in word.superhard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
         for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = words.superhard[wordIndex];
+            currentWord.textContent = selectedMode.superhard[wordIndex];
             //console.log(words.superhard[wordIndex]);
         }
     }
@@ -368,11 +321,7 @@ function showWord (words) {
 function checkMatch() {
     if (wordInput.value === currentWord.textContent) {
         calculateScore();
-        if (chosenModes === 1) {
-            showWord(words);
-        } else if (chosenModes === 2) {
-            showCssWord(css);
-        }
+        showWord(words);
         correctAnswer();
         //console.log(score);
         //console.log('correct');
