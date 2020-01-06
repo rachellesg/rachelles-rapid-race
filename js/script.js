@@ -123,7 +123,7 @@ function gameTimer () {
         isPlaying = true;
         timer--;
         console.log(timer, isPlaying);
-      if ((timer === 0) || (life === 0)) {
+      if ((timer === 0) || (life === 0) || (stage === -1)) {
         isPlaying = false;
         checkStatus();
         timer = 45;
@@ -153,13 +153,12 @@ function initGame() {
     wordInput.disabled = false;
     wordInput.focus();
     startGame();
-    createHealth();
-    createTimeBar();
 }
 
 // select mode
 function normalMode () {
     chosenModes = 1;
+    stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
     cssModeButton.style.display = "none";
@@ -170,6 +169,7 @@ function normalMode () {
 
 function cssMode () {
     chosenModes = 2;
+    stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
     cssModeButton.style.display = "none";
@@ -187,6 +187,7 @@ function rechooseModes() {
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
+// end game button
 function endGame () {
     currentWord.textContent = " ";
     showMessage.textContent = " ";
@@ -198,6 +199,7 @@ function endGame () {
     backgroundOST.currentTime = 0;
     endGameScore();
     timer = 0;
+    totalLives = [];
     isPlaying = false;
 }
 
@@ -209,10 +211,12 @@ function startGame() {
         showCssWord(css);
     }
     gameTimer();
+    stage = 0;
     console.log(timer);
     backgroundOST.play();
     backgroundOST.volume = 0.1;
     setInterval(checkStatus, 50);
+    gamePlayScreen.style.visibility = "visible";
     timeBar.style.visibility = "visible";
     floatingScore.style.visibility = "visible";
     wordInput.onkeypress = function(event) {
@@ -261,9 +265,31 @@ function restartGame() {
     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
     life = 5;
     score = 0;
+    counter = 3;
     livesLeft.innerHTML = totalLives.join("");
     console.log(timer);
     console.log(totalLives);
+}
+
+function totalRestart() {
+    chosenModes = null;
+    isPlaying = false;
+    gameoverScreen.style.visibility = "hidden";
+    totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+    timer = 45;
+    life = 5;
+    score = 0;
+    stage = -1;
+    counter = 3;
+    buttons.style.display = "block";
+    gamePlayScreen.style.visibility = "hidden";
+    startButton.style.display = "none";
+    backButton.style.display = "none";
+    timeBar.style.visibility = "hidden";
+    floatingScore.style.visibility = "hidden";
+    cssModeButton.style.display = "inline-block";
+    normalModeButton.style.display = "inline-block";
+    modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
 // generate CSS words
@@ -370,6 +396,7 @@ function checkStatus() {
         backgroundOST.currentTime = 0;
         endGameScore();
         totalLives = [];
+        timeBar.style.visibility = "hidden";
     }
 }
 
@@ -406,7 +433,6 @@ function loadingScreen() {
     gamePlayScreen.style.display = "block";
     buttons.style.display = "none";
     overlayScreen.style.visibility = "visible";
-    startButton.style.visibility = "hidden";
     var loadCountdown = setInterval(function() {
         counter = counter - 1;
         console.log("print count" + counter)
@@ -460,3 +486,5 @@ function buttonHover() {
 }
 
 buttonHover();
+createHealth();
+createTimeBar();
