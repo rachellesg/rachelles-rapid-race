@@ -260,7 +260,7 @@ function startGame() {
             clearInput();
         } else {
             // timer--;
-            showMessage.innerHTML = "I don't think that's quite right... 🧐";
+            showMessage.innerHTML = "I don't think that's quite right... <img class=\"icons\" src=\"img/oops.svg\">";
             clearInput();
         }
     }
