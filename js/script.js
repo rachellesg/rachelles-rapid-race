@@ -376,15 +376,15 @@ function endGameScore() {
         gameoverMessage.innerHTML = "You're pretty shite <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
     } else if (score >= 100 && score < 150) {
         gameoverMessage.innerHTML = "NOOB!!!  <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score >= 150) {
+    } else if (score >= 150 && score < 200) {
         gameoverMessage.innerHTML = "BELOW AVERAGE <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score >= 200) {
+    } else if (score >= 200 && score < 250) {
         gameoverMessage.innerHTML = "Meh, not too bad.. <br>You got " + score + " points";
-    } else if (score >= 250) {
+    } else if (score >= 250 && score < 300) {
         gameoverMessage.innerHTML = "Just ok... <br>You got " + score + " points";
     } else if (score >= 300) {
         gameoverMessage.innerHTML = "Kinda impressive?? But not really. <br>You got " + score + " points";
-    }  else if (score >= 350) {
+    }  else if (score >= 350 && score < 500) {
         gameoverMessage.innerHTML = "WOW ok now I am impressed!! <br>You got " + score + " points";
     }
 }
