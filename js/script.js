@@ -21,20 +21,17 @@ console.log("hellu it me");
 // add music as game goes on
 // add more modes (css) && || (javascript)
 // add option buttons for modes
+// add countdown sfx
 
 // DOING
-// add countdown sfx
 
 // CURRENT BUGS
 // words may appear twice in a row (only a bug if you want it to be lol)
-//
+// gameover sfx plays endlessly if i lost the game because of 0 lifes
 
 // FIXED BUGS
 // score starts at 0 even after first correct input
 // after restart game timer goes twice as fast
-
-// TO DO (important to not so important)
-// add true RESTART button where user can choose modes
 
 // BASIC FUNCTIONALITY
 // stage 1: words less than 8 letters ( after first 3 words )
@@ -46,7 +43,7 @@ console.log("hellu it me");
 
 //// ++ GLOBAL VARS ++ ////
 
-var timer = 30; // timer to type all words
+var timer = 45; // timer to type all words
 
 var score = 0; // total score
 var isPlaying = false; // if playing or not
@@ -76,6 +73,7 @@ var restartButton = document.querySelector("#restart-button");
 var modesMessage = document.querySelector("#option-message");
 var normalModeButton = document.querySelector("#normal-mode-button");
 var cssModeButton = document.querySelector("#css-mode-button");
+var phrasesModeButton = document.querySelector("#phrases-mode-button");
 var backButton = document.querySelector("#back-button");
 var endButton = document.querySelector("#end-button");
 
@@ -122,19 +120,18 @@ function createTimeBar () {
 // timery things
 function gameTimer () {
     var countdownTimer = setInterval(function(){
-        isPlaying = true;
         timer--;
         console.log(timer, isPlaying);
       if ((timer === 0) || (life === 0) || (stage === 999)) {
         isPlaying = false;
         checkStatus();
-        timer = 30;
         clearInterval(countdownTimer);
         console.log(timer);
       }
       showTime.innerHTML = timer;
     }, 1000);
     console.log(timer);
+    timer = 45;
 }
 
 // initialize game
@@ -151,9 +148,23 @@ function normalMode () {
     stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
+    phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
     modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3> In this mode you'll be typing words that start with 'R'... Press the button to begin the game!<br><br>";
+    console.log("normal clicked" + chosenModes);
+}
+
+function phrasesMode () {
+    chosenModes = 3;
+    selectedMode = phrases;
+    stage = 0;
+    backButton.style.display = "inline-block";
+    startButton.style.display = "inline-block";
+    phrasesModeButton.style.display = "none";
+    cssModeButton.style.display = "none";
+    normalModeButton.style.display = "none";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Phrases</span></h3> In this mode you'll be typing random phrases... and some of them from famous movies! Press the button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
@@ -163,6 +174,7 @@ function cssMode () {
     stage = 0;
     backButton.style.display = "inline-block";
     startButton.style.display = "inline-block";
+    phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
     modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">CSS</span></h3> In this mode you'll be typing CSS properties along with their values... Press the button to begin the game!<br><br>";
@@ -173,6 +185,7 @@ function rechooseModes() {
     chosenModes = null;
     cssModeButton.style.display = "inline-block";
     normalModeButton.style.display = "inline-block";
+    phrasesModeButton.style.display = "inline-block";
     startButton.style.display = "none";
     backButton.style.display = "none";
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
@@ -189,9 +202,11 @@ function endGame () {
     backgroundOST.pause();
     backgroundOST.currentTime = 0;
     endGameScore();
-    timer = 0;
+    timer = 45;
     totalLives = [];
+    stage = 999;
     isPlaying = false;
+    gameOverSound();
 }
 
 // <actually> start game
@@ -199,6 +214,7 @@ function startGame() {
     wordInput.focus();
     showWord(words);
     gameTimer();
+    timer = 45;
     stage = 0;
     score = 0;
     createHealth();
@@ -207,7 +223,7 @@ function startGame() {
     backgroundOST.play();
     backgroundOST.volume = 0.3;
     isPlaying = true;
-    setInterval(checkStatus, 50);
+    setInterval(checkStatus, 100);
     gamePlayScreen.style.visibility = "visible";
     timeBar.style.visibility = "visible";
     floatingScore.style.visibility = "visible";
@@ -268,11 +284,12 @@ function totalRestart() {
     isPlaying = false;
     gameoverScreen.style.visibility = "hidden";
     totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
-    timer = 30;
+    timer = 45;
     life = 5;
     counter = 3;
     showScore.innerHTML = "0";
     livesLeft.innerHTML = "";
+    showTime.innerHTML = "30";
     buttons.style.display = "block";
     gamePlayScreen.style.display = "none";
     startButton.style.display = "none";
@@ -281,40 +298,29 @@ function totalRestart() {
     floatingScore.style.visibility = "hidden";
     cssModeButton.style.display = "inline-block";
     normalModeButton.style.display = "inline-block";
+    phrasesModeButton.style.display = "inline-block";
     gameoverBox.classList.remove("bounce-in");
     modesMessage.innerHTML = "First, select your preferred mode:<br><br>";
 }
 
 // generate words
-function showWord (words,css) {
+function showWord (words,phrases,css) {
     if (stage < 4) {
         var maxWords = selectedMode.easy.length; // ALL of the objects in word.easy array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = selectedMode.easy[wordIndex];
-            //console.log(words.easy[wordIndex]);
-        }
+        currentWord.textContent = selectedMode.easy[wordIndex];
     } else if (stage >= 4 && stage < 12) {
         var maxWords = selectedMode.medium.length; // ALL of the objects in word.medium array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = selectedMode.medium[wordIndex];
-            //console.log(words.medium[wordIndex]);
-        }
+        currentWord.textContent = selectedMode.medium[wordIndex];
     } else if (stage >= 12 && stage < 20) {
         var maxWords = selectedMode.hard.length; // ALL of the objects in word.hard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = selectedMode.hard[wordIndex];
-            //console.log(words.hard[wordIndex]);
-        }
+        currentWord.textContent = selectedMode.hard[wordIndex];
     } else if (stage >= 20) {
         var maxWords = selectedMode.superhard.length; // ALL of the objects in word.superhard array
         var wordIndex = Math.floor(Math.random() * (maxWords - 0)); // random int
-        for (var i = 0; i <= wordIndex; i++) {
-            currentWord.textContent = selectedMode.superhard[wordIndex];
-            //console.log(words.superhard[wordIndex]);
-        }
+        currentWord.textContent = selectedMode.superhard[wordIndex];
     }
 }
 
@@ -336,21 +342,28 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
-    if ((!isPlaying && timer === 0) || (life === 0) || (timer === 0)) {
-        gameOverSound();
+    if ((!isPlaying && timer === 0) || (!isPlaying && life === 0)) {
         //gameoverBox.innerHTML = 'Game Over!!!';
         currentWord.textContent = " ";
         showMessage.textContent = " ";
         clearInput();
         wordInput.disabled = true;
+        console.log(isPlaying);
         gameoverScreen.style.visibility = "visible";
         gameoverBox.classList.add("bounce-in");
         backgroundOST.pause();
         backgroundOST.currentTime = 0;
         endGameScore();
         totalLives = [];
-        stage = 999;
         timeBar.style.visibility = "hidden";
+        setTimeout(function() {
+            gameOverSound();
+        },1000);
+        setTimeout(function() {
+            life = 5;
+            timer = 45;
+            console.log(life);
+        },2000);
     }
 }
 
@@ -413,7 +426,6 @@ function loadingScreen() {
 function gameOverSound() {
     var gameOverSfx = document.getElementById("gameover");
     gameOverSfx.play();
-    gameOverSfx.loop = false;
 }
 
 // sound effect for gameover
@@ -427,8 +439,8 @@ function correctAnswer() {
     var right = document.getElementById("correct");
     right.play();
     timer = timer + 3;
-    if (timer > 30) {
-        timer = 30;
+    if (timer > 45) {
+        timer = 45;
     }
 }
 
