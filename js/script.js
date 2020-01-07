@@ -86,7 +86,6 @@ var gameoverBox = document.querySelector(".gameover-box");
 var gameoverMessage = document.querySelector(".gameover-message");
 var gamePlayScreen = document.querySelector("#gameplay-screen");
 
-
 var floatingScore = document.querySelector(".floating-score");
 var counter = 3; // countdown 3,2,1 and start game
 var livesLeft = document.querySelector("#lives");
@@ -151,7 +150,7 @@ function normalMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3> In this mode you'll be typing words that start with 'R'... Press the button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3> In this mode you'll be typing words that start with 'R'... Press the 'START' button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
@@ -164,7 +163,7 @@ function phrasesMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Phrases</span></h3> In this mode you'll be typing random phrases... and some of them from famous movies! Press the button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Phrases</span></h3> In this mode you'll be typing random phrases... or quotes from famous movies! Press the 'START' button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
@@ -177,7 +176,7 @@ function cssMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">CSS</span></h3> In this mode you'll be typing CSS properties along with their values... Press the button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">CSS</span></h3> In this mode you'll be typing CSS properties along with their values... Press the 'START' button to begin the game!<br><br>";
     console.log("css clicked" + chosenModes);
 }
 
@@ -238,20 +237,23 @@ function startGame() {
             case 1:
                 showMessage.innerHTML = "Not too bad....";
             break;
-            case 4:
+            case 5:
                 showMessage.innerHTML = "Doing well so far hey!";
             break;
-            case 7:
+            case 10:
                 showMessage.innerHTML = "It's just gonna get harder from here!";
             break;
-            case 10:
+            case 15:
                 showMessage.innerHTML = "Wow ok you're still here 🤨";
             break;
-            case 12:
+            case 20:
                 showMessage.innerHTML = "From here on it's REALLY gonna get supercalifragileistically HARDER!";
             break;
+            case 25:
+                showMessage.innerHTML = "You're doing better than the average!";
+            break;
             default:
-                showMessage.innerHTML = "Good job...";
+                showMessage.innerHTML = "Good job!! Keep going!! 👍🏻";
                 //console.log(stage);
             }
             // console.log("user stage" + stage); // tested and stage works
@@ -373,9 +375,17 @@ function endGameScore() {
     } else if (score > 50 && score <= 99) {
         gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
     } else if (score >= 100 && score < 150) {
-        gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
+        gameoverMessage.innerHTML = "NOOB!!!  👎🏻<br>You got " + score + " points";
     } else if (score >= 150) {
-        gameoverMessage.innerHTML = "Ok....... <br>You got " + score + " points";
+        gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
+    } else if (score >= 200) {
+        gameoverMessage.innerHTML = "Meh, not too bad.. <br>You got " + score + " points";
+    } else if (score >= 250) {
+        gameoverMessage.innerHTML = "Just ok... <br>You got " + score + " points";
+    } else if (score >= 300) {
+        gameoverMessage.innerHTML = "Kinda impressive?? But not really. <br>You got " + score + " points";
+    }  else if (score >= 350) {
+        gameoverMessage.innerHTML = "WOW ok now I am impressed!! <br>You got " + score + " points";
     }
 }
 
@@ -421,6 +431,11 @@ function loadingScreen() {
 }
 
 //// ++ SOUNDS ++ ////
+
+function pauseAudio() {
+    var allAudio = document.querySelectorAll("audio");
+    allAudio.pause();
+}
 
 // sound effect for gameover
 function gameOverSound() {
@@ -473,3 +488,4 @@ function buttonHover() {
 }
 
 buttonHover();
+allAudio();
