@@ -253,7 +253,7 @@ function startGame() {
                 showMessage.innerHTML = "You're doing better than the average!";
             break;
             default:
-                showMessage.innerHTML = "Good job!! Keep going!! 👍🏻";
+                showMessage.innerHTML = "Good job!! Keep going!! <img class=\"icons\" src=\"img/up.svg\">";
                 //console.log(stage);
             }
             // console.log("user stage" + stage); // tested and stage works
@@ -371,13 +371,13 @@ function checkStatus() {
 
 function endGameScore() {
     if (score <= 50) {
-        gameoverMessage.innerHTML = "Wow you're horrible at this.... 👎🏻<br>You got " + score + " points";
+        gameoverMessage.innerHTML = "Wow you're horrible at this.... <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
     } else if (score > 50 && score <= 99) {
-        gameoverMessage.innerHTML = "You're pretty shite 👎🏻<br>You got " + score + " points";
+        gameoverMessage.innerHTML = "You're pretty shite <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
     } else if (score >= 100 && score < 150) {
-        gameoverMessage.innerHTML = "NOOB!!!  👎🏻<br>You got " + score + " points";
+        gameoverMessage.innerHTML = "NOOB!!!  <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
     } else if (score >= 150) {
-        gameoverMessage.innerHTML = "BELOW AVERAGE 👎🏻<br>You got " + score + " points";
+        gameoverMessage.innerHTML = "BELOW AVERAGE <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
     } else if (score >= 200) {
         gameoverMessage.innerHTML = "Meh, not too bad.. <br>You got " + score + " points";
     } else if (score >= 250) {
@@ -488,4 +488,3 @@ function buttonHover() {
 }
 
 buttonHover();
-pauseAudio();
