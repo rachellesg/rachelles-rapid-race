@@ -488,4 +488,4 @@ function buttonHover() {
 }
 
 buttonHover();
-allAudio();
+pauseAudio();
