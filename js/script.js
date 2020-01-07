@@ -192,6 +192,7 @@ function rechooseModes() {
 
 // end game button
 function endGame () {
+    gameOverSound();
     currentWord.textContent = " ";
     showMessage.textContent = " ";
     clearInput();
@@ -205,7 +206,6 @@ function endGame () {
     totalLives = [];
     stage = 999;
     isPlaying = false;
-    gameOverSound();
 }
 
 // <actually> start game
@@ -431,11 +431,6 @@ function loadingScreen() {
 }
 
 //// ++ SOUNDS ++ ////
-
-function pauseAudio() {
-    var allAudio = document.querySelectorAll("audio");
-    allAudio.pause();
-}
 
 // sound effect for gameover
 function gameOverSound() {
