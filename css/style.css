@@ -15,6 +15,14 @@ body {
     animation: animatedBackground 1000s linear infinite;
 }
 
+@media only screen and (max-device-width : 640px) {
+/* Styles */
+    main {
+        content: 'Sorry! This game is only available on desktop screens.';
+    }
+}
+
+
 .cloud {
     animation: floating-cloud 3s infinite ease;
     background: url(../img/cloud.png) center no-repeat;
