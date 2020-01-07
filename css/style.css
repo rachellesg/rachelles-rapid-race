@@ -56,6 +56,10 @@ main {
     position: relative;
 }
 
+.small {
+    font-size: 25px !important;
+}
+
 /* overlay screen */
 
 #overlay-screen {
@@ -179,11 +183,11 @@ header {
 input {
     background: rgb(255,255,255,0.5);
     border: none;
-    max-width: 100%;
+    width: 100%;
     text-align: center;
     border-bottom: 5px solid #efb7c0;
     outline: none;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 /*input,
@@ -240,11 +244,11 @@ input[disabled] {
 
 /* big word  */
 #current-word {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     background: #FFFFFF;
     width: 100%;
-    max-width: 375px;
+    /*max-width: 375px;*/
     margin: 0 auto 20px;
     -webkit-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
     -moz-box-shadow: 2px 10px 11px 0px rgba(0,0,0,0.12);
@@ -347,13 +351,13 @@ button:hover {
     border-radius: 50%;
     position: absolute;
     right: 0;
-    top: 30vh;
+    top: 20vh;
     color: #000000;
 }
 
 @media screen and (min-width: 1024px) {
     .floating-score {
-        right: -60px;
+        right: -120px;
     }
 }
 
