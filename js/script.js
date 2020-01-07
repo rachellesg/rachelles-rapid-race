@@ -50,8 +50,8 @@ var isPlaying = false; // if playing or not
 
 var stage = 0; // (normal mode)
 
-var life = 5;
-var totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+var life = 3;
+var totalLives = ["❤️", "❤️", "❤️"];
 
 var chosenModes;
 var selectedMode;
@@ -205,7 +205,7 @@ function normalMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3> In this mode you'll be typing words that start with 'R'... Press the 'START' button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Words</span></h3><span class=\"selected\">Difficulty: <strong>Easy</strong></span><br>In this mode you'll be typing words that start with 'R'... Press the 'START' button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
@@ -218,7 +218,7 @@ function phrasesMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Phrases</span></h3> In this mode you'll be typing random phrases... or quotes from famous movies! Press the 'START' button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">Phrases</span></h3><span class=\"selected\">Difficulty: <strong>Medium</strong></span><br>In this mode you'll be typing random phrases... or quotes from famous movies! Press the 'START' button to begin the game!<br><br>";
     console.log("normal clicked" + chosenModes);
 }
 
@@ -231,7 +231,7 @@ function cssMode () {
     phrasesModeButton.style.display = "none";
     cssModeButton.style.display = "none";
     normalModeButton.style.display = "none";
-    modesMessage.innerHTML = "<h3>You chose to play <span class=\"selected\">CSS</span></h3> In this mode you'll be typing CSS properties along with their values... Press the 'START' button to begin the game!<br><br>";
+    modesMessage.innerHTML = "<h3>Challenge yourself with the latest <span class=\"selected\">CSS</span> mode!</h3><span class=\"selected\">Difficulty: <strong>Medium</strong></span><br>Practice and test your skills by typing CSS properties along with their values...  Press the 'START' button to begin the game!<br><br>";
     console.log("css clicked" + chosenModes);
 }
 
@@ -275,9 +275,10 @@ function startGame() {
     createTimeBar();
     console.log(timer);
     backgroundOST.play();
+    backgroundOST.loop = true;
     backgroundOST.volume = 0.3;
     isPlaying = true;
-    setInterval(checkStatus, 100);
+    setInterval(checkStatus, 50);
     gamePlayScreen.style.visibility = "visible";
     timeBar.style.visibility = "visible";
     floatingScore.style.visibility = "visible";
@@ -302,10 +303,10 @@ function startGame() {
                 showMessage.innerHTML = "Wow ok you're still here 🤨";
             break;
             case 20:
-                showMessage.innerHTML = "From here on it's REALLY gonna get supercalifragileistically HARDER!";
+                showMessage.innerHTML = "You're doing better than the average!";
             break;
             case 25:
-                showMessage.innerHTML = "You're doing better than the average!";
+                showMessage.innerHTML = "From here on it's REALLY gonna get supercalifragileistically HARDER!";
             break;
             default:
                 showMessage.innerHTML = "Good job!! Keep going!! <img class=\"icons\" src=\"img/up.svg\">";
@@ -340,13 +341,13 @@ function totalRestart() {
     chosenModes = null;
     isPlaying = false;
     gameoverScreen.style.visibility = "hidden";
-    totalLives = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+    totalLives = ["❤️", "❤️", "❤️"];
     timer = 45;
-    life = 5;
+    life = 3;
     counter = 3;
     showScore.innerHTML = "0";
     livesLeft.innerHTML = "";
-    showTime.innerHTML = "30";
+    showTime.innerHTML = "45";
     buttons.style.display = "block";
     gamePlayScreen.style.display = "none";
     startButton.style.display = "none";
@@ -418,9 +419,9 @@ function checkStatus() {
         timeBar.style.visibility = "hidden";
         setTimeout(function() {
             gameOverSound();
-        },1000);
+        },10);
         setTimeout(function() {
-            life = 5;
+            life = 3;
             timer = 45;
             console.log(life);
         },2000);
@@ -430,19 +431,19 @@ function checkStatus() {
 function endGameScore() {
     if (score <= 50) {
         gameoverMessage.innerHTML = "Wow you're horrible at this.... <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score > 50 && score <= 99) {
+    } else if (score > 50 && score <= 150) {
         gameoverMessage.innerHTML = "You're pretty shite <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score >= 100 && score < 150) {
+    } else if (score >= 150 && score < 250) {
         gameoverMessage.innerHTML = "NOOB!!!  <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score >= 150 && score < 200) {
+    } else if (score >= 250 && score < 350) {
         gameoverMessage.innerHTML = "BELOW AVERAGE <img class=\"icons\" src=\"img/down.svg\"><br>You got " + score + " points";
-    } else if (score >= 200 && score < 250) {
-        gameoverMessage.innerHTML = "Meh, not too bad.. <br>You got " + score + " points";
-    } else if (score >= 250 && score < 300) {
-        gameoverMessage.innerHTML = "Just ok... <br>You got " + score + " points";
-    } else if (score >= 300) {
+    } else if (score >= 350 && score < 450) {
+        gameoverMessage.innerHTML = "Meh, not too bad.. You're average like everyone else <br>You got " + score + " points";
+    } else if (score >= 450 && score < 550) {
+        gameoverMessage.innerHTML = "Just ok... Slightly above average. This is like a grade C. <br>You got " + score + " points";
+    } else if (score >= 550 && score < 650) {
         gameoverMessage.innerHTML = "Kinda impressive?? But not really. <br>You got " + score + " points";
-    }  else if (score >= 350 && score < 500) {
+    }  else if (score >= 650 ) {
         gameoverMessage.innerHTML = "WOW ok now I am impressed!! <br>You got " + score + " points";
     }
 }
@@ -455,7 +456,7 @@ function calculateScore() {
         score = score + 20;
         //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 10) {
-        score = score + 12;
+        score = score + 15;
         //console.log("this word is " + wordLength + " letters long");
     } else if (wordLength >= 5) {
         score = score + 10;

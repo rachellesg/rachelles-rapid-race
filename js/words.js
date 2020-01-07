@@ -157,6 +157,9 @@ var phrases = {
         'make my day',
         'i am groot',
         'just keep swimming',
+        'bond. james bond',
+        'e.t phone home',
+        'this is sparta!'
     ],
 
     'medium':[
@@ -174,6 +177,9 @@ var phrases = {
         'you shall not pass!',
         'hasta la vista, baby',
         'ogres are like onions',
+        'to infinity and beyond!',
+        'get off my lawn',
+        'that is so fetch',
     ],
 
     'hard':[
@@ -194,6 +200,13 @@ var phrases = {
         'get in loser! we\'re going shopping!',
         'wow this is a goddamn greek tragedy',
         'welcome back, cowboy',
+        'here\'s looking at you, kid',
+        'she asked me how to spell orange',
+        'and none for gretchen wieners bye',
+        'one time, she punched me in the face. it was awesome.',
+        'on wednesdays we wear pink',
+        'you smell like a baby prostitute',
+
     ],
 
     'superhard': [
@@ -205,6 +218,14 @@ var phrases = {
         'let us step into the night and pursue that flighty temptress, adventure',
         'we are only as strong as we are united, as weak as we are divided',
         'mama always said life was like a box of chocolates, you never know what you\'re gonna get',
+        'the first rule of fight club is you do not talk about fight club',
+        'magic mirror on the wall, who is the fairest one of all?',
+        'they may take our lives, but they\'ll never take our freedom!',
+        'that\'s my secret, captain: i\'m always angry',
+        'this is the day you will always remember as the day you almost caught Captain Jack Sparrow!',
+        'gretchen stop trying to make fetch happen, it\'s not going to happen!',
+        'ex-boyfriends are off-limits to friends. that\’s just, like, the rules of feminism.',
+        'if you\’re from Africa, why are you white?'
     ],
 };
 
