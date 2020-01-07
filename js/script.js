@@ -91,6 +91,60 @@ var counter = 3; // countdown 3,2,1 and start game
 var livesLeft = document.querySelector("#lives");
 var backgroundOST = document.getElementById("background");
 
+//// ++ SOUNDS ++ ////
+
+// sound effect for gameover
+function gameOverSound() {
+    var gameOverSfx = document.getElementById("gameover");
+    gameOverSfx.play();
+}
+
+// sound effect for gameover
+function countdownBeep() {
+    var countdownbeep = document.getElementById("countdownbeep");
+    countdownbeep.play();
+}
+
+// sound effect for correct answer
+function correctAnswer() {
+    var right = document.getElementById("correct");
+    right.play();
+    timer = timer + 3;
+    if (timer > 45) {
+        timer = 45;
+    }
+}
+
+// sound effect for correct answer
+function incorrectAnswer() {
+    var wrong = document.getElementById("incorrect");
+    wrong.play();
+    setTimeout(function() {
+        wordInput.classList.add("shake");
+    },100);
+    setTimeout(function() {
+        wordInput.classList.remove("shake");
+    },200);
+    life--;
+    totalLives.pop();
+    livesLeft.innerHTML = totalLives.join("");
+    //console.log("print" + totalLives.length);
+}
+
+// sound effect for buttons
+function buttonHover() {
+    var hover = document.getElementById("hoverbutton");
+    var buttons = document.querySelectorAll("button");
+    buttons.forEach(function(item) {
+        item.addEventListener("mouseover", function() {
+            //this function does stuff
+            hover.play();
+        });
+    });
+}
+
+buttonHover();
+
 //// ++ BASIC FUNCTIONS ++ ////
 
 // clear input
@@ -121,11 +175,12 @@ function gameTimer () {
     var countdownTimer = setInterval(function(){
         timer--;
         console.log(timer, isPlaying);
-      if ((timer === 0) || (life === 0) || (stage === 999)) {
+      if ((timer === 0) || (life === 0) || (life === -1) || (stage === 999)) {
         isPlaying = false;
         checkStatus();
         clearInterval(countdownTimer);
         console.log(timer);
+        console.log(life);
       }
       showTime.innerHTML = timer;
     }, 1000);
@@ -344,6 +399,9 @@ function checkMatch() {
 
 // check game status
 function checkStatus() {
+    if (life === -1) {
+        life = 0;
+    }
     if ((!isPlaying && timer === 0) || (!isPlaying && life === 0)) {
         //gameoverBox.innerHTML = 'Game Over!!!';
         currentWord.textContent = " ";
@@ -429,57 +487,3 @@ function loadingScreen() {
     }, 4000);
     wordInput.focus();
 }
-
-//// ++ SOUNDS ++ ////
-
-// sound effect for gameover
-function gameOverSound() {
-    var gameOverSfx = document.getElementById("gameover");
-    gameOverSfx.play();
-}
-
-// sound effect for gameover
-function countdownBeep() {
-    var countdownbeep = document.getElementById("countdownbeep");
-    countdownbeep.play();
-}
-
-// sound effect for correct answer
-function correctAnswer() {
-    var right = document.getElementById("correct");
-    right.play();
-    timer = timer + 3;
-    if (timer > 45) {
-        timer = 45;
-    }
-}
-
-// sound effect for correct answer
-function incorrectAnswer() {
-    var wrong = document.getElementById("incorrect");
-    wrong.play();
-    setTimeout(function() {
-        wordInput.classList.add("shake");
-    },100);
-    setTimeout(function() {
-        wordInput.classList.remove("shake");
-    },200);
-    life--;
-    totalLives.pop();
-    livesLeft.innerHTML = totalLives.join("");
-    //console.log("print" + totalLives.length);
-}
-
-// sound effect for buttons
-function buttonHover() {
-    var hover = document.getElementById("hoverbutton");
-    var buttons = document.querySelectorAll("button");
-    buttons.forEach(function(item) {
-        item.addEventListener("mouseover", function() {
-            //this function does stuff
-            hover.play();
-        });
-    });
-}
-
-buttonHover();
