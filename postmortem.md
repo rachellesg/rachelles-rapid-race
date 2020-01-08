@@ -56,7 +56,7 @@ For each, please include code examples.
 
 ### Code design documents or architecture drawings / diagrams.
 
-![alt text](img/screenshot.png "Initial Figma Design")
+![Initial Figma Design](https://i.imgur.com/RSRIroD.png "Initial Figma Design")
 
 
 ## WDI Unit 1 Post Mortem
