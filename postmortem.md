@@ -56,9 +56,12 @@ This went pretty well as I initially had multiple duplicating functions performi
 
 ### Code design documents or architecture drawings / diagrams.
 
-Initial Figma Design
+#### Initial Figma Design
 
 ![Initial Figma Design](https://i.imgur.com/RSRIroD.png "Initial Figma Design")
+
+#### Game Logic pseudo code written to keep track
+
 ![Game Logic pseudo code](https://i.imgur.com/TzUbLfe.png "Game Logic")
 
 
