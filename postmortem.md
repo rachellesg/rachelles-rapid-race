@@ -20,8 +20,6 @@ Try and adopt the KISS methods to coding. Get better at cleaning up and refactor
 
 Sourcing for game assets went well. Pulled off game concept well too. Creating base functionality and slowly adding on extra features once foundation is secured. Also committing to Github often.
 
-----
-
 ## Code and Code Design
 
 ### What in my code and program design in the project would I do differently next time?
@@ -33,6 +31,8 @@ Variable naming was ok but could probably do better.
 For each, please include code examples.
 
 ### Code snippet up to 20 lines.
+
+This went pretty well as I initially had multiple duplicating functions performing the exact same thing. Refactored it on Akira's recommendation and shortened it to one function for all 3 modes.
 
 > function showWord (words,phrases,css) {
 >    if (stage < 4) {
@@ -56,7 +56,10 @@ For each, please include code examples.
 
 ### Code design documents or architecture drawings / diagrams.
 
+Initial Figma Design
+
 ![Initial Figma Design](https://i.imgur.com/RSRIroD.png "Initial Figma Design")
+![Game Logic pseudo code](https://i.imgur.com/TzUbLfe.png "Game Logic")
 
 
 ## WDI Unit 1 Post Mortem
@@ -67,6 +70,7 @@ Committing often so it was easy to trace back my code. Knowing when to STOP (and
 
 ### What habits did I have during this unit that I can improve on?
 
+I did a bit of user testing and probably should have done MORE. Writing better, simpler, reusable code.
 
 
 ### How is the overall level of the course during this unit? (instruction, course materials, etc.)
