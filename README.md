@@ -3,6 +3,8 @@
 ## Description
 GA project for Unit 1
 
+[Play the game here!](https://rachellesg.github.io/rachelles-rapid-race/)
+
 ## Gameplay
 
 A simple speed typing game, get as many as you can within 45 seconds, the faster you type the harder the words get. 3 seconds will be added to your timer if you get a word right, but a life will be lost if you get any wrong!
@@ -15,6 +17,13 @@ A simple speed typing game, get as many as you can within 45 seconds, the faster
 
 **CSS:** Practise your CSS typing skills with this new mode!
 
+
+## Application and Development Process
+
+### Built With
+* HTML
+* CSS
+* Javascript
 
 ## Credits
 
